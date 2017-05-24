@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.LoadoMasterRecordMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.LoadoMasterRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="carNo" jdbcType="VARCHAR" property="carno" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="dataOperateType" jdbcType="VARCHAR" property="dataoperatetype" />
+    <result column="disposeUnitCode" jdbcType="VARCHAR" property="disposeunitcode" />
+    <result column="driver" jdbcType="VARCHAR" property="driver" />
+    <result column="grossDateTime" jdbcType="TIMESTAMP" property="grossdatetime" />
+    <result column="grossWeight" jdbcType="REAL" property="grossweight" />
+    <result column="handleUnit" jdbcType="VARCHAR" property="handleunit" />
+    <result column="icCode" jdbcType="VARCHAR" property="iccode" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="netWeight" jdbcType="REAL" property="netweight" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="productToWhere" jdbcType="VARCHAR" property="producttowhere" />
+    <result column="productType" jdbcType="VARCHAR" property="producttype" />
+    <result column="sourceUnit" jdbcType="VARCHAR" property="sourceunit" />
+    <result column="tareDateTime" jdbcType="TIMESTAMP" property="taredatetime" />
+    <result column="tareWeight" jdbcType="REAL" property="tareweight" />
+    <result column="transportUnit" jdbcType="VARCHAR" property="transportunit" />
+    <result column="url1" jdbcType="VARCHAR" property="url1" />
+    <result column="url2" jdbcType="VARCHAR" property="url2" />
+    <result column="url3" jdbcType="VARCHAR" property="url3" />
+    <result column="url4" jdbcType="VARCHAR" property="url4" />
+    <result column="weighMan" jdbcType="VARCHAR" property="weighman" />
+    <result column="weighMode" jdbcType="VARCHAR" property="weighmode" />
+    <result column="weightNo" jdbcType="VARCHAR" property="weightno" />
+    <result column="fillTime" jdbcType="TIMESTAMP" property="filltime" />
+    <result column="icRecordId" jdbcType="VARCHAR" property="icrecordid" />
+    <result column="productInOrOut" jdbcType="VARCHAR" property="productinorout" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, area, carNo, code, 
+    dataOperateType, disposeUnitCode, driver, grossDateTime, grossWeight, handleUnit, 
+    icCode, memo, netWeight, no, productName, productToWhere, productType, sourceUnit, 
+    tareDateTime, tareWeight, transportUnit, url1, url2, url3, url4, weighMan, weighMode, 
+    weightNo, fillTime, icRecordId, productInOrOut
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loadometer_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from loadometer_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.LoadoMasterRecord">
+    insert into loadometer_record (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      area, carNo, code, 
+      dataOperateType, disposeUnitCode, driver, 
+      grossDateTime, grossWeight, handleUnit, 
+      icCode, memo, netWeight, 
+      no, productName, productToWhere, 
+      productType, sourceUnit, tareDateTime, 
+      tareWeight, transportUnit, url1, 
+      url2, url3, url4, weighMan, 
+      weighMode, weightNo, fillTime, 
+      icRecordId, productInOrOut)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{area,jdbcType=VARCHAR}, #{carno,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{dataoperatetype,jdbcType=VARCHAR}, #{disposeunitcode,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, 
+      #{grossdatetime,jdbcType=TIMESTAMP}, #{grossweight,jdbcType=REAL}, #{handleunit,jdbcType=VARCHAR}, 
+      #{iccode,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{netweight,jdbcType=REAL}, 
+      #{no,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttowhere,jdbcType=VARCHAR}, 
+      #{producttype,jdbcType=VARCHAR}, #{sourceunit,jdbcType=VARCHAR}, #{taredatetime,jdbcType=TIMESTAMP}, 
+      #{tareweight,jdbcType=REAL}, #{transportunit,jdbcType=VARCHAR}, #{url1,jdbcType=VARCHAR}, 
+      #{url2,jdbcType=VARCHAR}, #{url3,jdbcType=VARCHAR}, #{url4,jdbcType=VARCHAR}, #{weighman,jdbcType=VARCHAR}, 
+      #{weighmode,jdbcType=VARCHAR}, #{weightno,jdbcType=VARCHAR}, #{filltime,jdbcType=TIMESTAMP}, 
+      #{icrecordid,jdbcType=VARCHAR}, #{productinorout,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.LoadoMasterRecord">
+    insert into loadometer_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="carno != null">
+        carNo,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="dataoperatetype != null">
+        dataOperateType,
+      </if>
+      <if test="disposeunitcode != null">
+        disposeUnitCode,
+      </if>
+      <if test="driver != null">
+        driver,
+      </if>
+      <if test="grossdatetime != null">
+        grossDateTime,
+      </if>
+      <if test="grossweight != null">
+        grossWeight,
+      </if>
+      <if test="handleunit != null">
+        handleUnit,
+      </if>
+      <if test="iccode != null">
+        icCode,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="netweight != null">
+        netWeight,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="producttowhere != null">
+        productToWhere,
+      </if>
+      <if test="producttype != null">
+        productType,
+      </if>
+      <if test="sourceunit != null">
+        sourceUnit,
+      </if>
+      <if test="taredatetime != null">
+        tareDateTime,
+      </if>
+      <if test="tareweight != null">
+        tareWeight,
+      </if>
+      <if test="transportunit != null">
+        transportUnit,
+      </if>
+      <if test="url1 != null">
+        url1,
+      </if>
+      <if test="url2 != null">
+        url2,
+      </if>
+      <if test="url3 != null">
+        url3,
+      </if>
+      <if test="url4 != null">
+        url4,
+      </if>
+      <if test="weighman != null">
+        weighMan,
+      </if>
+      <if test="weighmode != null">
+        weighMode,
+      </if>
+      <if test="weightno != null">
+        weightNo,
+      </if>
+      <if test="filltime != null">
+        fillTime,
+      </if>
+      <if test="icrecordid != null">
+        icRecordId,
+      </if>
+      <if test="productinorout != null">
+        productInOrOut,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="carno != null">
+        #{carno,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="dataoperatetype != null">
+        #{dataoperatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeunitcode != null">
+        #{disposeunitcode,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="grossdatetime != null">
+        #{grossdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grossweight != null">
+        #{grossweight,jdbcType=REAL},
+      </if>
+      <if test="handleunit != null">
+        #{handleunit,jdbcType=VARCHAR},
+      </if>
+      <if test="iccode != null">
+        #{iccode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="netweight != null">
+        #{netweight,jdbcType=REAL},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="producttowhere != null">
+        #{producttowhere,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceunit != null">
+        #{sourceunit,jdbcType=VARCHAR},
+      </if>
+      <if test="taredatetime != null">
+        #{taredatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tareweight != null">
+        #{tareweight,jdbcType=REAL},
+      </if>
+      <if test="transportunit != null">
+        #{transportunit,jdbcType=VARCHAR},
+      </if>
+      <if test="url1 != null">
+        #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2 != null">
+        #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="url3 != null">
+        #{url3,jdbcType=VARCHAR},
+      </if>
+      <if test="url4 != null">
+        #{url4,jdbcType=VARCHAR},
+      </if>
+      <if test="weighman != null">
+        #{weighman,jdbcType=VARCHAR},
+      </if>
+      <if test="weighmode != null">
+        #{weighmode,jdbcType=VARCHAR},
+      </if>
+      <if test="weightno != null">
+        #{weightno,jdbcType=VARCHAR},
+      </if>
+      <if test="filltime != null">
+        #{filltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icrecordid != null">
+        #{icrecordid,jdbcType=VARCHAR},
+      </if>
+      <if test="productinorout != null">
+        #{productinorout,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.LoadoMasterRecord">
+    update loadometer_record
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="carno != null">
+        carNo = #{carno,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="dataoperatetype != null">
+        dataOperateType = #{dataoperatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeunitcode != null">
+        disposeUnitCode = #{disposeunitcode,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="grossdatetime != null">
+        grossDateTime = #{grossdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grossweight != null">
+        grossWeight = #{grossweight,jdbcType=REAL},
+      </if>
+      <if test="handleunit != null">
+        handleUnit = #{handleunit,jdbcType=VARCHAR},
+      </if>
+      <if test="iccode != null">
+        icCode = #{iccode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="netweight != null">
+        netWeight = #{netweight,jdbcType=REAL},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="producttowhere != null">
+        productToWhere = #{producttowhere,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        productType = #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceunit != null">
+        sourceUnit = #{sourceunit,jdbcType=VARCHAR},
+      </if>
+      <if test="taredatetime != null">
+        tareDateTime = #{taredatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tareweight != null">
+        tareWeight = #{tareweight,jdbcType=REAL},
+      </if>
+      <if test="transportunit != null">
+        transportUnit = #{transportunit,jdbcType=VARCHAR},
+      </if>
+      <if test="url1 != null">
+        url1 = #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2 != null">
+        url2 = #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="url3 != null">
+        url3 = #{url3,jdbcType=VARCHAR},
+      </if>
+      <if test="url4 != null">
+        url4 = #{url4,jdbcType=VARCHAR},
+      </if>
+      <if test="weighman != null">
+        weighMan = #{weighman,jdbcType=VARCHAR},
+      </if>
+      <if test="weighmode != null">
+        weighMode = #{weighmode,jdbcType=VARCHAR},
+      </if>
+      <if test="weightno != null">
+        weightNo = #{weightno,jdbcType=VARCHAR},
+      </if>
+      <if test="filltime != null">
+        fillTime = #{filltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icrecordid != null">
+        icRecordId = #{icrecordid,jdbcType=VARCHAR},
+      </if>
+      <if test="productinorout != null">
+        productInOrOut = #{productinorout,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.LoadoMasterRecord">
+    update loadometer_record
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      area = #{area,jdbcType=VARCHAR},
+      carNo = #{carno,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      dataOperateType = #{dataoperatetype,jdbcType=VARCHAR},
+      disposeUnitCode = #{disposeunitcode,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      grossDateTime = #{grossdatetime,jdbcType=TIMESTAMP},
+      grossWeight = #{grossweight,jdbcType=REAL},
+      handleUnit = #{handleunit,jdbcType=VARCHAR},
+      icCode = #{iccode,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      netWeight = #{netweight,jdbcType=REAL},
+      no = #{no,jdbcType=VARCHAR},
+      productName = #{productname,jdbcType=VARCHAR},
+      productToWhere = #{producttowhere,jdbcType=VARCHAR},
+      productType = #{producttype,jdbcType=VARCHAR},
+      sourceUnit = #{sourceunit,jdbcType=VARCHAR},
+      tareDateTime = #{taredatetime,jdbcType=TIMESTAMP},
+      tareWeight = #{tareweight,jdbcType=REAL},
+      transportUnit = #{transportunit,jdbcType=VARCHAR},
+      url1 = #{url1,jdbcType=VARCHAR},
+      url2 = #{url2,jdbcType=VARCHAR},
+      url3 = #{url3,jdbcType=VARCHAR},
+      url4 = #{url4,jdbcType=VARCHAR},
+      weighMan = #{weighman,jdbcType=VARCHAR},
+      weighMode = #{weighmode,jdbcType=VARCHAR},
+      weightNo = #{weightno,jdbcType=VARCHAR},
+      fillTime = #{filltime,jdbcType=TIMESTAMP},
+      icRecordId = #{icrecordid,jdbcType=VARCHAR},
+      productInOrOut = #{productinorout,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

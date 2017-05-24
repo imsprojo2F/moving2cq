@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movingcq.dao.DriverInfoMapper">
+
+	<resultMap id="BaseResultMap" type="com.movingcq.entity.DriverInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="pic_code" property="pic_code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="id_card_number" property="id_card_number" jdbcType="VARCHAR" />
+		<result column="phone_number" property="phone_number" jdbcType="VARCHAR" />
+		<result column="photo_name" property="photo_name" jdbcType="VARCHAR" />
+		<result column="src" property="src" jdbcType="VARCHAR" />
+		<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, name, bucket_mode, id_card_number, phone_number,photo_name,src, create_time,
+		update_time
+	</sql>
+	
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from driver_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	
+	<select id="listAllDriver" resultMap="BaseResultMap"  parameterType="Map">
+		select * from driver_info where 1 = 1 
+		<if test="key !=null and key!=''">
+			and  name like '%${key}%'
+		</if>
+	</select>
+	
+	<select id="selectByPage" parameterType="Map"
+		resultType="Map">
+		select * from driver_info where 1 = 1 
+		<if test="key !=null and key!=''">
+			and name like '%${key}%' 
+		</if>
+		<if test="sort !=null and sort!='' and order !=null and order !=''">
+			Order by ${sort} ${order}
+		</if>
+		LIMIT ${pageNow},${pageSize}
+	</select>
+
+	<insert id="addDriver" parameterType="com.movingcq.entity.DriverInfo">
+		insert into driver_info (
+		pic_code,name, id_card_number,
+		phone_number,photo_name,src, create_time, update_time
+		)
+		values
+		(
+		#{pic_code,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{id_card_number,jdbcType=VARCHAR},
+		#{phone_number,jdbcType=VARCHAR},
+		#{photo_name,jdbcType=VARCHAR},
+		#{src,jdbcType=VARCHAR},
+		#{create_time,jdbcType=TIMESTAMP}, 
+		#{update_time,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<insert id="insertByCode" >
+		insert into driver_info (
+		pic_code,photo_name,src, create_time
+		)
+		values
+		(
+		#{0},
+		#{1},
+		#{2},
+		NOW()
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		<![CDATA[DELETE from driver_info where id in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="updateById" parameterType="com.movingcq.entity.DriverInfo">
+		update driver_info
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="id_card_number != null">
+				id_card_number = #{id_card_number,jdbcType=VARCHAR},
+			</if>
+			<if test="phone_number != null">
+				phone_number = #{phone_number,jdbcType=DOUBLE},
+			</if>
+			<if test="photo_name != null">
+				photo_name = #{photo_name,jdbcType=VARCHAR},
+			</if>
+			<if test="src != null">
+				src = #{src,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateByCode" parameterType="com.movingcq.entity.DriverInfo">
+		update driver_info
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="id_card_number != null">
+				id_card_number = #{id_card_number,jdbcType=VARCHAR},
+			</if>
+			<if test="phone_number != null">
+				phone_number = #{phone_number,jdbcType=DOUBLE},
+			</if>
+			<if test="photo_name != null">
+				photo_name = #{photo_name,jdbcType=VARCHAR},
+			</if>
+			<if test="src != null">
+				src = #{src,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where pic_code = #{pic_code,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateFilePath" >
+		update driver_info
+		<set>
+				photo_name = #{1},
+				src = #{2}
+			
+		</set>
+		where pic_code = #{0}
+	</update>
+</mapper>

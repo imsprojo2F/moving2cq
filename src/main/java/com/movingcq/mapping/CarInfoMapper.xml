@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.CarInfoMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.CarInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="carCode" jdbcType="VARCHAR" property="carcode" />
+    <result column="carLoad" jdbcType="VARCHAR" property="carload" />
+    <result column="driverPhone" jdbcType="VARCHAR" property="driverphone" />
+    <result column="driver" jdbcType="VARCHAR" property="driver" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, carCode, carLoad, 
+    driverPhone, driver
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from car_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.CarInfo">
+    insert into car_info (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      carCode, carLoad, driverPhone, 
+      driver)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{carcode,jdbcType=VARCHAR}, #{carload,jdbcType=VARCHAR}, #{driverphone,jdbcType=VARCHAR}, 
+      #{driver,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.CarInfo">
+    insert into car_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="carcode != null">
+        carCode,
+      </if>
+      <if test="carload != null">
+        carLoad,
+      </if>
+      <if test="driverphone != null">
+        driverPhone,
+      </if>
+      <if test="driver != null">
+        driver,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carcode != null">
+        #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="carload != null">
+        #{carload,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null">
+        #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.CarInfo">
+    update car_info
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carcode != null">
+        carCode = #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="carload != null">
+        carLoad = #{carload,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null">
+        driverPhone = #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.CarInfo">
+    update car_info
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      carCode = #{carcode,jdbcType=VARCHAR},
+      carLoad = #{carload,jdbcType=VARCHAR},
+      driverPhone = #{driverphone,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByCarCode" resultMap="BaseResultMap" parameterType="Map">
+		select * from car_info 
+			where carCode = #{key}
+  </select>
+  
+  <select id="listAllCar" resultMap="BaseResultMap"  parameterType="Map">
+		select * from car_info  where 1=1 and beenDeleted=0
+		<if test="key !=null and key!=''">
+			and carCode like '%${key}%'
+		</if>
+	</select>
+	
+	<select id="selectByPage" parameterType="Map" resultType="Map">
+		select * from car_info  where 1=1	and beenDeleted=0
+		
+		<if test="key !=null and key!=''">
+			and carCode like '%${key}%' 
+		</if>
+		<if test="sort !=null and sort!='' ">
+			Order by ${sort} ${dir}
+		</if>
+		
+		LIMIT ${pageNow},${pageSize}
+	</select>
+</mapper>

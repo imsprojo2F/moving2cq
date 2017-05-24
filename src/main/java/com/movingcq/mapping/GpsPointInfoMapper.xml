@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.GpsPointInfoMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.GpsPointInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="CreateTime" jdbcType="BIGINT" property="createtime" />
+    <result column="devCode" jdbcType="VARCHAR" property="devcode" />
+    <result column="gpsValid" jdbcType="INTEGER" property="gpsvalid" />
+    <result column="equipmentTime" jdbcType="BIGINT" property="equipmenttime" />
+    <result column="gpsLatitude" jdbcType="DOUBLE" property="gpslatitude" />
+    <result column="gpsLongitude" jdbcType="DOUBLE" property="gpslongitude" />
+    <result column="gpsAltitude" jdbcType="DOUBLE" property="gpsaltitude" />
+    <result column="gpsSpeed" jdbcType="DOUBLE" property="gpsspeed" />
+    <result column="stateIgnition" jdbcType="INTEGER" property="stateignition" />
+    <result column="done" jdbcType="INTEGER" property="done" />
+    <result column="longitudeDone" jdbcType="DOUBLE" property="longitudedone" />
+    <result column="latitudeDone" jdbcType="DOUBLE" property="latitudedone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, CreateTime, devCode, gpsValid, equipmentTime, gpsLatitude, gpsLongitude, gpsAltitude, 
+    gpsSpeed, stateIgnition, done, longitudeDone, latitudeDone, address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gps_point_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gps_point_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.GpsPointInfo">
+    insert into gps_point_info (id, CreateTime, devCode, 
+      gpsValid, equipmentTime, gpsLatitude, 
+      gpsLongitude, gpsAltitude, gpsSpeed, 
+      stateIgnition, done, longitudeDone, 
+      latitudeDone, address)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT}, #{devcode,jdbcType=VARCHAR}, 
+      #{gpsvalid,jdbcType=INTEGER}, #{equipmenttime,jdbcType=BIGINT}, #{gpslatitude,jdbcType=DOUBLE}, 
+      #{gpslongitude,jdbcType=DOUBLE}, #{gpsaltitude,jdbcType=DOUBLE}, #{gpsspeed,jdbcType=DOUBLE}, 
+      #{stateignition,jdbcType=INTEGER}, #{done,jdbcType=INTEGER}, #{longitudedone,jdbcType=DOUBLE}, 
+      #{latitudedone,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.GpsPointInfo">
+    insert into gps_point_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="devcode != null">
+        devCode,
+      </if>
+      <if test="gpsvalid != null">
+        gpsValid,
+      </if>
+      <if test="equipmenttime != null">
+        equipmentTime,
+      </if>
+      <if test="gpslatitude != null">
+        gpsLatitude,
+      </if>
+      <if test="gpslongitude != null">
+        gpsLongitude,
+      </if>
+      <if test="gpsaltitude != null">
+        gpsAltitude,
+      </if>
+      <if test="gpsspeed != null">
+        gpsSpeed,
+      </if>
+      <if test="stateignition != null">
+        stateIgnition,
+      </if>
+      <if test="done != null">
+        done,
+      </if>
+      <if test="longitudedone != null">
+        longitudeDone,
+      </if>
+      <if test="latitudedone != null">
+        latitudeDone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="devcode != null">
+        #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsvalid != null">
+        #{gpsvalid,jdbcType=INTEGER},
+      </if>
+      <if test="equipmenttime != null">
+        #{equipmenttime,jdbcType=BIGINT},
+      </if>
+      <if test="gpslatitude != null">
+        #{gpslatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpslongitude != null">
+        #{gpslongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsaltitude != null">
+        #{gpsaltitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsspeed != null">
+        #{gpsspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="stateignition != null">
+        #{stateignition,jdbcType=INTEGER},
+      </if>
+      <if test="done != null">
+        #{done,jdbcType=INTEGER},
+      </if>
+      <if test="longitudedone != null">
+        #{longitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="latitudedone != null">
+        #{latitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.GpsPointInfo">
+    update gps_point_info
+    <set>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="devcode != null">
+        devCode = #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsvalid != null">
+        gpsValid = #{gpsvalid,jdbcType=INTEGER},
+      </if>
+      <if test="equipmenttime != null">
+        equipmentTime = #{equipmenttime,jdbcType=BIGINT},
+      </if>
+      <if test="gpslatitude != null">
+        gpsLatitude = #{gpslatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpslongitude != null">
+        gpsLongitude = #{gpslongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsaltitude != null">
+        gpsAltitude = #{gpsaltitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsspeed != null">
+        gpsSpeed = #{gpsspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="stateignition != null">
+        stateIgnition = #{stateignition,jdbcType=INTEGER},
+      </if>
+      <if test="done != null">
+        done = #{done,jdbcType=INTEGER},
+      </if>
+      <if test="longitudedone != null">
+        longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="latitudedone != null">
+        latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.GpsPointInfo">
+    update gps_point_info
+    set CreateTime = #{createtime,jdbcType=BIGINT},
+      devCode = #{devcode,jdbcType=VARCHAR},
+      gpsValid = #{gpsvalid,jdbcType=INTEGER},
+      equipmentTime = #{equipmenttime,jdbcType=BIGINT},
+      gpsLatitude = #{gpslatitude,jdbcType=DOUBLE},
+      gpsLongitude = #{gpslongitude,jdbcType=DOUBLE},
+      gpsAltitude = #{gpsaltitude,jdbcType=DOUBLE},
+      gpsSpeed = #{gpsspeed,jdbcType=DOUBLE},
+      stateIgnition = #{stateignition,jdbcType=INTEGER},
+      done = #{done,jdbcType=INTEGER},
+      longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

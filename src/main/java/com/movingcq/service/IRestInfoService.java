@@ -1,0 +1,41 @@
+package com.movingcq.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.movingcq.entity.RestaurantInfo;
+
+public interface IRestInfoService {
+
+	public int insert(RestaurantInfo rInfo);
+
+	public int insertByCode(String code, String fileName, String filepath);
+
+	/**
+	 * @param ids
+	 * @return
+	 */
+	public int deleteById(String[] ids);
+
+	/**
+	 * @param sysUser
+	 * @return
+	 */
+	public int updateById(RestaurantInfo rInfo);
+
+	public int updateByCode(RestaurantInfo rInfo);
+
+	public int updateByDynamic(Map<String, String> map);
+
+	public int updateFilePath(String uuid, String fileName, String filepath);
+
+	public int delFilePath(String uuid);
+
+	public List<RestaurantInfo> listAllRestInfo(Map<String, Object> qMap);
+
+	public List<Map<String, Object>> selectByPage(Map<String, Object> qMap);
+
+	public List<Map<String, String>> selectById(Map<String, Object> qMap);
+
+	int selectById(String id);
+}

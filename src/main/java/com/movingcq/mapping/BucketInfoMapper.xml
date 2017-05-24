@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movingcq.dao.BucketInfoMapper">
+
+	<resultMap id="BaseResultMap" type="com.movingcq.entity.BucketInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bucket_code" property="bucket_code" jdbcType="VARCHAR" />
+		<result column="bucket_mode" property="bucket_mode" jdbcType="VARCHAR" />
+		<result column="is_binding" property="is_binding" jdbcType="INTEGER" />
+		<result column="volume" property="volume" jdbcType="DOUBLE" />
+		<result column="rfid" property="rfid" jdbcType="VARCHAR" />
+		<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<resultMap id="MergeMap" type="com.movingcq.entity.Bucket2RfidInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bucket_code" property="bucket_code" jdbcType="VARCHAR" />
+		<result column="bucket_mode" property="bucket_mode" jdbcType="VARCHAR" />
+		<result column="is_binding" property="is_binding" jdbcType="INTEGER" />
+		<result column="volume" property="volume" jdbcType="DOUBLE" />
+		<result column="rfid" property="rfid" jdbcType="VARCHAR" />
+		<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+		<result column="rfid" property="rfid" jdbcType="VARCHAR" />
+		<result column="rfid_status" property="rfid_status" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, bucket_code, bucket_mode,is_binding, volume, rfid, create_time,
+		update_time
+	</sql>
+	
+	<select id="selectByAcc" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bucket_info
+		where bucket_code = #{bucket_code,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from bucket_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	
+	<select id="listAllBucket" resultMap="BaseResultMap"  parameterType="Map">
+		select * from bucket_info  where rfid != ''  
+		<if test="key !=null and key!=''">
+			and bucket_code like '%${key}%' 
+		</if>
+	</select>
+	
+	<select id="getAllBucket" resultMap="MergeMap" >
+		select b.*,r.* from bucket_info b , rfid_info r WHERE b.rfid=r.rfid and b.is_binding=0 and r.rfid_status='正常';
+	</select>
+	
+	<select id="selectByPage" parameterType="Map"
+		resultType="Map">
+		select * from bucket_info  where rfid != ''
+		<if test="key !=null and key!=''">
+			and bucket_code like '%${key}%' 
+		</if>
+		<if test="sort !=null and sort!='' and dir !=null and dir !=''">
+			Order by ${sort} ${dir}
+		</if>
+		LIMIT ${pageNow},${pageSize}
+	</select>
+
+	<insert id="addBucket" parameterType="com.movingcq.entity.BucketInfo">
+		insert into bucket_info (
+		bucket_code, bucket_mode,
+		volume,rfid, create_time, update_time
+		)
+		values
+		(
+		#{bucket_code,jdbcType=VARCHAR},
+		#{bucket_mode,jdbcType=VARCHAR},
+		#{volume,jdbcType=DOUBLE},
+		#{rfid,jdbcType=VARCHAR},
+		#{create_time,jdbcType=TIMESTAMP}, 
+		#{update_time,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		<![CDATA[DELETE from bucket_info where id in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteByRfids" parameterType="java.lang.String">
+		<![CDATA[DELETE from bucket_info where rfid in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="updateById" parameterType="com.movingcq.entity.BucketInfo">
+		update bucket_info
+		<set>
+			<if test="bucket_code != null">
+				bucket_code = #{bucket_code,jdbcType=VARCHAR},
+			</if>
+			<if test="bucket_mode != null">
+				bucket_mode = #{bucket_mode,jdbcType=VARCHAR},
+			</if>
+			<if test="is_binding != null">
+				is_binding = #{is_binding,jdbcType=INTEGER},
+			</if>
+			<if test="volume != null">
+				volume = #{volume,jdbcType=DOUBLE},
+			</if>
+			<if test="rfid != null">
+				rfid = #{rfid,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateByRfid" >
+		update bucket_info
+		<set>
+			rfid = #{0},
+		</set>
+		where rfid = #{1}
+	</update>
+	
+</mapper>

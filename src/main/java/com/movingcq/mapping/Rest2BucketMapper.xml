@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movingcq.dao.Rest2BucketMapper">
+
+	<resultMap id="BaseResultMap" type="com.movingcq.entity.RestaurantBucketInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="restaurant_id" property="restaurant_id" jdbcType="INTEGER" />
+		<result column="bucket_id" property="bucket_id" jdbcType="INTEGER" />
+		<result column="binding_date" property="binding_date" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, restaurant_id, bucket_id, binding_date,create_time,update_time
+	</sql>
+	
+
+	<select id="listAllBinding" resultType="HashMap" >
+		select r.*,b.* from restaurant_bucket r ,bucket_info b where r.bucket_id = b.id and b.is_binding=1
+		and r.restaurant_id =#{0} 
+	</select>
+	
+	<select id="getAllBindIdByRestid" resultType="com.movingcq.entity.RestaurantBucketInfo" >
+		select * from restaurant_bucket  where restaurant_id=${restId} 
+	</select>
+	
+	<select id="getBindByRestId"  parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from restaurant_bucket  where restaurant_id=${restId}
+	</select>
+	
+	
+
+	<insert id="addBinding" parameterType="com.movingcq.entity.RestaurantBucketInfo">
+		insert into restaurant_bucket (
+		restaurant_id,bucket_id, binding_date,create_time, update_time
+		)
+		values
+		(
+		#{restaurant_id,jdbcType=INTEGER},
+		#{bucket_id,jdbcType=INTEGER},
+		NOW(),
+		NOW(), 
+		#{update_time,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE from restaurant_bucket where restaurant_id =#{0} and bucket_id=#{1}
+	</delete>
+	
+</mapper>

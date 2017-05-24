@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.DailyReportMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.DailyReport">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="stree" jdbcType="VARCHAR" property="stree" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="restaurant_count_new" jdbcType="INTEGER" property="restaurantCountNew" />
+    <result column="restaurant_count_logout" jdbcType="INTEGER" property="restaurantCountLogout" />
+    <result column="restaurant_count" jdbcType="INTEGER" property="restaurantCount" />
+    <result column="restaurant_count_rc" jdbcType="INTEGER" property="restaurantCountRc" />
+    <result column="weight_avg" jdbcType="DOUBLE" property="weightAvg" />
+    <result column="rfid_count" jdbcType="INTEGER" property="rfidCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, area, stree, date, weight, restaurant_count_new, restaurant_count_logout, restaurant_count, 
+    restaurant_count_rc, weight_avg, rfid_count, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from daily_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from daily_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.DailyReport">
+    insert into daily_report (id, area, stree, 
+      date, weight, restaurant_count_new, 
+      restaurant_count_logout, restaurant_count, 
+      restaurant_count_rc, weight_avg, rfid_count, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, #{stree,jdbcType=VARCHAR}, 
+      #{date,jdbcType=DATE}, #{weight,jdbcType=DOUBLE}, #{restaurantCountNew,jdbcType=INTEGER}, 
+      #{restaurantCountLogout,jdbcType=INTEGER}, #{restaurantCount,jdbcType=INTEGER}, 
+      #{restaurantCountRc,jdbcType=INTEGER}, #{weightAvg,jdbcType=DOUBLE}, #{rfidCount,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.DailyReport">
+    insert into daily_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="stree != null">
+        stree,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="restaurantCountNew != null">
+        restaurant_count_new,
+      </if>
+      <if test="restaurantCountLogout != null">
+        restaurant_count_logout,
+      </if>
+      <if test="restaurantCount != null">
+        restaurant_count,
+      </if>
+      <if test="restaurantCountRc != null">
+        restaurant_count_rc,
+      </if>
+      <if test="weightAvg != null">
+        weight_avg,
+      </if>
+      <if test="rfidCount != null">
+        rfid_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="stree != null">
+        #{stree,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="restaurantCountNew != null">
+        #{restaurantCountNew,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantCountLogout != null">
+        #{restaurantCountLogout,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantCount != null">
+        #{restaurantCount,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantCountRc != null">
+        #{restaurantCountRc,jdbcType=INTEGER},
+      </if>
+      <if test="weightAvg != null">
+        #{weightAvg,jdbcType=DOUBLE},
+      </if>
+      <if test="rfidCount != null">
+        #{rfidCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.DailyReport">
+    update daily_report
+    <set>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="stree != null">
+        stree = #{stree,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="restaurantCountNew != null">
+        restaurant_count_new = #{restaurantCountNew,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantCountLogout != null">
+        restaurant_count_logout = #{restaurantCountLogout,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantCount != null">
+        restaurant_count = #{restaurantCount,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantCountRc != null">
+        restaurant_count_rc = #{restaurantCountRc,jdbcType=INTEGER},
+      </if>
+      <if test="weightAvg != null">
+        weight_avg = #{weightAvg,jdbcType=DOUBLE},
+      </if>
+      <if test="rfidCount != null">
+        rfid_count = #{rfidCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.DailyReport">
+    update daily_report
+    set area = #{area,jdbcType=VARCHAR},
+      stree = #{stree,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      weight = #{weight,jdbcType=DOUBLE},
+      restaurant_count_new = #{restaurantCountNew,jdbcType=INTEGER},
+      restaurant_count_logout = #{restaurantCountLogout,jdbcType=INTEGER},
+      restaurant_count = #{restaurantCount,jdbcType=INTEGER},
+      restaurant_count_rc = #{restaurantCountRc,jdbcType=INTEGER},
+      weight_avg = #{weightAvg,jdbcType=DOUBLE},
+      rfid_count = #{rfidCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
