@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 餐厨表数据获取 -->
+	<bean id="getDataBean" class="com.movingcq.quartz.QuartzJob">
+	</bean>
+	
+	<bean id="getDataBean2" class="com.movingcq.quartz.QuartzJob2">
+	</bean>
+
+	<bean id="getDataJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="getDataBean" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+	
+	<bean id="getDataJob2"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="getDataBean2" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+
+	<!-- 9点到18点, 每2个小时执行一次 -->
+	<!-- <bean id="getDataTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="getDataJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 9-18/2 * * ?</value>
+			<value>0 */1 * * * ?</value>
+		</property>
+	</bean> -->
+	
+	<!-- 配置项目启动后任务就执行一次 -->  
+    <bean id="getDataTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="getDataJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 */5 * * * ?</value>
+		</property>  
+    </bean> 
+    
+    <bean id="getDataTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="getDataJob2" />
+		</property>
+		<property name="cronExpression">
+			<value>0 */1 * * * ?</value>
+		</property>  
+    </bean>
+
+	
+
+	<!-- 触发器总管理类配置 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="getDataTrigger" />
+				<ref bean="getDataTrigger2" />
+			</list>
+		</property>
+	</bean>
+</beans>

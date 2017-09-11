@@ -1,0 +1,900 @@
+package com.movingcq.entity;
+
+import java.util.Date;
+
+public class RestaurantInfo {
+	private String id;
+
+	private Date createtime;
+
+	private Date lastchangetime;
+
+	private Integer status;
+
+	private Integer beendeleted;
+
+	private Date deletedtime;
+
+	private String address;
+
+	private Float businessarea;
+
+	private Date closedate;
+
+	private String code;
+
+	private Float collectfrequency;
+
+	private String complaintshotline;
+
+	private String contactperson;
+
+	private String contactphone;
+
+	private Float contractlength;
+
+	private String contractno;
+
+	private Float dailyoutput;
+
+	private Float dailyoutputwasteoil;
+
+	private String documentno;
+
+	private Date endcollecttime;
+
+	private Date hygieniclicensedate;
+
+	private Integer iscollectscdoil;
+
+	private Date lastcollectdatetime;
+
+	private Double latitude;
+
+	private Double latitudedone;
+
+	private String legalrepresentative;
+
+	private Double longitude;
+
+	private Double longitudedone;
+
+	private String mealrange;
+
+	private String name;
+
+	private Date opendate;
+
+	private Integer orderindex;
+
+	private Integer permit;
+
+	private String permitno;
+
+	private String phonenumber;
+
+	private String photofile;
+
+	private String photoids;
+
+	private Float remain;
+
+	private String remarks;
+
+	private String scale;
+
+	private Date signingdate;
+
+	private String starlevel;
+
+	private Date startcollecttime;
+
+	private String sycompanyid;
+
+	private String sycompanyfile;
+
+	private Integer trashbinnum;
+
+	private String type;
+
+	private Float wasteoil;
+
+	private String classesid;
+
+	private String documenttypeid;
+
+	private String streetid;
+
+	private Integer logout;
+
+	private Date logouttime;
+
+	private Date sourcetime;
+
+	private Integer sourcetype;
+
+	private String contacttel;
+
+	private String legalmanfileids;
+
+	private String legalmanphone;
+
+	private String legalmantel;
+
+	private String sourcemanid;
+
+	private Date endcollecttime2;
+
+	private String files;
+
+	private Date mealtime;
+
+	private String restaurantaddress;
+
+	private Date startcollecttime2;
+
+	private String unitaddress;
+
+	private String unitname;
+
+	private String lastcollectcarcode;
+
+	private String lastcollectcarid;
+
+	private String mealrangedisplayvalue;
+
+	private String mealrangeid;
+
+	private String pinyin;
+
+	private String contactmobile;
+
+	private Integer signedstatus;
+
+	private Integer elevator;
+
+	private Date signingenddate;
+
+	private Integer stair;
+
+	private Date syenddate;
+
+	private Date systartdate;
+
+	private Integer floornum;
+
+	private String sycompanyname;
+
+	private Integer applytrashbinnum;
+
+	private Integer datasource;
+
+	private String paperfileids;
+
+	private String paperfilenames;
+
+	private String creditassessrecord;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id == null ? null : id.trim();
+	}
+
+	public Date getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+
+	public Date getLastchangetime() {
+		return lastchangetime;
+	}
+
+	public void setLastchangetime(Date lastchangetime) {
+		this.lastchangetime = lastchangetime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getBeendeleted() {
+		return beendeleted;
+	}
+
+	public void setBeendeleted(Integer beendeleted) {
+		this.beendeleted = beendeleted;
+	}
+
+	public Date getDeletedtime() {
+		return deletedtime;
+	}
+
+	public void setDeletedtime(Date deletedtime) {
+		this.deletedtime = deletedtime;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address == null ? null : address.trim();
+	}
+
+	public Float getBusinessarea() {
+		return businessarea;
+	}
+
+	public void setBusinessarea(Float businessarea) {
+		this.businessarea = businessarea;
+	}
+
+	public Date getClosedate() {
+		return closedate;
+	}
+
+	public void setClosedate(Date closedate) {
+		this.closedate = closedate;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code == null ? null : code.trim();
+	}
+
+	public Float getCollectfrequency() {
+		return collectfrequency;
+	}
+
+	public void setCollectfrequency(Float collectfrequency) {
+		this.collectfrequency = collectfrequency;
+	}
+
+	public String getComplaintshotline() {
+		return complaintshotline;
+	}
+
+	public void setComplaintshotline(String complaintshotline) {
+		this.complaintshotline = complaintshotline == null ? null : complaintshotline.trim();
+	}
+
+	public String getContactperson() {
+		return contactperson;
+	}
+
+	public void setContactperson(String contactperson) {
+		this.contactperson = contactperson == null ? null : contactperson.trim();
+	}
+
+	public String getContactphone() {
+		return contactphone;
+	}
+
+	public void setContactphone(String contactphone) {
+		this.contactphone = contactphone == null ? null : contactphone.trim();
+	}
+
+	public Float getContractlength() {
+		return contractlength;
+	}
+
+	public void setContractlength(Float contractlength) {
+		this.contractlength = contractlength;
+	}
+
+	public String getContractno() {
+		return contractno;
+	}
+
+	public void setContractno(String contractno) {
+		this.contractno = contractno == null ? null : contractno.trim();
+	}
+
+	public Float getDailyoutput() {
+		return dailyoutput;
+	}
+
+	public void setDailyoutput(Float dailyoutput) {
+		this.dailyoutput = dailyoutput;
+	}
+
+	public Float getDailyoutputwasteoil() {
+		return dailyoutputwasteoil;
+	}
+
+	public void setDailyoutputwasteoil(Float dailyoutputwasteoil) {
+		this.dailyoutputwasteoil = dailyoutputwasteoil;
+	}
+
+	public String getDocumentno() {
+		return documentno;
+	}
+
+	public void setDocumentno(String documentno) {
+		this.documentno = documentno == null ? null : documentno.trim();
+	}
+
+	public Date getEndcollecttime() {
+		return endcollecttime;
+	}
+
+	public void setEndcollecttime(Date endcollecttime) {
+		this.endcollecttime = endcollecttime;
+	}
+
+	public Date getHygieniclicensedate() {
+		return hygieniclicensedate;
+	}
+
+	public void setHygieniclicensedate(Date hygieniclicensedate) {
+		this.hygieniclicensedate = hygieniclicensedate;
+	}
+
+	public Integer getIscollectscdoil() {
+		return iscollectscdoil;
+	}
+
+	public void setIscollectscdoil(Integer iscollectscdoil) {
+		this.iscollectscdoil = iscollectscdoil;
+	}
+
+	public Date getLastcollectdatetime() {
+		return lastcollectdatetime;
+	}
+
+	public void setLastcollectdatetime(Date lastcollectdatetime) {
+		this.lastcollectdatetime = lastcollectdatetime;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLatitudedone() {
+		return latitudedone;
+	}
+
+	public void setLatitudedone(Double latitudedone) {
+		this.latitudedone = latitudedone;
+	}
+
+	public String getLegalrepresentative() {
+		return legalrepresentative;
+	}
+
+	public void setLegalrepresentative(String legalrepresentative) {
+		this.legalrepresentative = legalrepresentative == null ? null : legalrepresentative.trim();
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public Double getLongitudedone() {
+		return longitudedone;
+	}
+
+	public void setLongitudedone(Double longitudedone) {
+		this.longitudedone = longitudedone;
+	}
+
+	public String getMealrange() {
+		return mealrange;
+	}
+
+	public void setMealrange(String mealrange) {
+		this.mealrange = mealrange == null ? null : mealrange.trim();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
+
+	public Date getOpendate() {
+		return opendate;
+	}
+
+	public void setOpendate(Date opendate) {
+		this.opendate = opendate;
+	}
+
+	public Integer getOrderindex() {
+		return orderindex;
+	}
+
+	public void setOrderindex(Integer orderindex) {
+		this.orderindex = orderindex;
+	}
+
+	public Integer getPermit() {
+		return permit;
+	}
+
+	public void setPermit(Integer permit) {
+		this.permit = permit;
+	}
+
+	public String getPermitno() {
+		return permitno;
+	}
+
+	public void setPermitno(String permitno) {
+		this.permitno = permitno == null ? null : permitno.trim();
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber == null ? null : phonenumber.trim();
+	}
+
+	public String getPhotofile() {
+		return photofile;
+	}
+
+	public void setPhotofile(String photofile) {
+		this.photofile = photofile == null ? null : photofile.trim();
+	}
+
+	public String getPhotoids() {
+		return photoids;
+	}
+
+	public void setPhotoids(String photoids) {
+		this.photoids = photoids == null ? null : photoids.trim();
+	}
+
+	public Float getRemain() {
+		return remain;
+	}
+
+	public void setRemain(Float remain) {
+		this.remain = remain;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks == null ? null : remarks.trim();
+	}
+
+	public String getScale() {
+		return scale;
+	}
+
+	public void setScale(String scale) {
+		this.scale = scale == null ? null : scale.trim();
+	}
+
+	public Date getSigningdate() {
+		return signingdate;
+	}
+
+	public void setSigningdate(Date signingdate) {
+		this.signingdate = signingdate;
+	}
+
+	public String getStarlevel() {
+		return starlevel;
+	}
+
+	public void setStarlevel(String starlevel) {
+		this.starlevel = starlevel == null ? null : starlevel.trim();
+	}
+
+	public Date getStartcollecttime() {
+		return startcollecttime;
+	}
+
+	public void setStartcollecttime(Date startcollecttime) {
+		this.startcollecttime = startcollecttime;
+	}
+
+	public String getSycompanyid() {
+		return sycompanyid;
+	}
+
+	public void setSycompanyid(String sycompanyid) {
+		this.sycompanyid = sycompanyid == null ? null : sycompanyid.trim();
+	}
+
+	public String getSycompanyfile() {
+		return sycompanyfile;
+	}
+
+	public void setSycompanyfile(String sycompanyfile) {
+		this.sycompanyfile = sycompanyfile == null ? null : sycompanyfile.trim();
+	}
+
+	public Integer getTrashbinnum() {
+		return trashbinnum;
+	}
+
+	public void setTrashbinnum(Integer trashbinnum) {
+		this.trashbinnum = trashbinnum;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type == null ? null : type.trim();
+	}
+
+	public Float getWasteoil() {
+		return wasteoil;
+	}
+
+	public void setWasteoil(Float wasteoil) {
+		this.wasteoil = wasteoil;
+	}
+
+	public String getClassesid() {
+		return classesid;
+	}
+
+	public void setClassesid(String classesid) {
+		this.classesid = classesid == null ? null : classesid.trim();
+	}
+
+	public String getDocumenttypeid() {
+		return documenttypeid;
+	}
+
+	public void setDocumenttypeid(String documenttypeid) {
+		this.documenttypeid = documenttypeid == null ? null : documenttypeid.trim();
+	}
+
+	public String getStreetid() {
+		return streetid;
+	}
+
+	public void setStreetid(String streetid) {
+		this.streetid = streetid == null ? null : streetid.trim();
+	}
+
+	public Integer getLogout() {
+		return logout;
+	}
+
+	public void setLogout(Integer logout) {
+		this.logout = logout;
+	}
+
+	public Date getLogouttime() {
+		return logouttime;
+	}
+
+	public void setLogouttime(Date logouttime) {
+		this.logouttime = logouttime;
+	}
+
+	public Date getSourcetime() {
+		return sourcetime;
+	}
+
+	public void setSourcetime(Date sourcetime) {
+		this.sourcetime = sourcetime;
+	}
+
+	public Integer getSourcetype() {
+		return sourcetype;
+	}
+
+	public void setSourcetype(Integer sourcetype) {
+		this.sourcetype = sourcetype;
+	}
+
+	public String getContacttel() {
+		return contacttel;
+	}
+
+	public void setContacttel(String contacttel) {
+		this.contacttel = contacttel == null ? null : contacttel.trim();
+	}
+
+	public String getLegalmanfileids() {
+		return legalmanfileids;
+	}
+
+	public void setLegalmanfileids(String legalmanfileids) {
+		this.legalmanfileids = legalmanfileids == null ? null : legalmanfileids.trim();
+	}
+
+	public String getLegalmanphone() {
+		return legalmanphone;
+	}
+
+	public void setLegalmanphone(String legalmanphone) {
+		this.legalmanphone = legalmanphone == null ? null : legalmanphone.trim();
+	}
+
+	public String getLegalmantel() {
+		return legalmantel;
+	}
+
+	public void setLegalmantel(String legalmantel) {
+		this.legalmantel = legalmantel == null ? null : legalmantel.trim();
+	}
+
+	public String getSourcemanid() {
+		return sourcemanid;
+	}
+
+	public void setSourcemanid(String sourcemanid) {
+		this.sourcemanid = sourcemanid == null ? null : sourcemanid.trim();
+	}
+
+	public Date getEndcollecttime2() {
+		return endcollecttime2;
+	}
+
+	public void setEndcollecttime2(Date endcollecttime2) {
+		this.endcollecttime2 = endcollecttime2;
+	}
+
+	public String getFiles() {
+		return files;
+	}
+
+	public void setFiles(String files) {
+		this.files = files == null ? null : files.trim();
+	}
+
+	public Date getMealtime() {
+		return mealtime;
+	}
+
+	public void setMealtime(Date mealtime) {
+		this.mealtime = mealtime;
+	}
+
+	public String getRestaurantaddress() {
+		return restaurantaddress;
+	}
+
+	public void setRestaurantaddress(String restaurantaddress) {
+		this.restaurantaddress = restaurantaddress == null ? null : restaurantaddress.trim();
+	}
+
+	public Date getStartcollecttime2() {
+		return startcollecttime2;
+	}
+
+	public void setStartcollecttime2(Date startcollecttime2) {
+		this.startcollecttime2 = startcollecttime2;
+	}
+
+	public String getUnitaddress() {
+		return unitaddress;
+	}
+
+	public void setUnitaddress(String unitaddress) {
+		this.unitaddress = unitaddress == null ? null : unitaddress.trim();
+	}
+
+	public String getUnitname() {
+		return unitname;
+	}
+
+	public void setUnitname(String unitname) {
+		this.unitname = unitname == null ? null : unitname.trim();
+	}
+
+	public String getLastcollectcarcode() {
+		return lastcollectcarcode;
+	}
+
+	public void setLastcollectcarcode(String lastcollectcarcode) {
+		this.lastcollectcarcode = lastcollectcarcode == null ? null : lastcollectcarcode.trim();
+	}
+
+	public String getLastcollectcarid() {
+		return lastcollectcarid;
+	}
+
+	public void setLastcollectcarid(String lastcollectcarid) {
+		this.lastcollectcarid = lastcollectcarid == null ? null : lastcollectcarid.trim();
+	}
+
+	public String getMealrangedisplayvalue() {
+		return mealrangedisplayvalue;
+	}
+
+	public void setMealrangedisplayvalue(String mealrangedisplayvalue) {
+		this.mealrangedisplayvalue = mealrangedisplayvalue == null ? null : mealrangedisplayvalue.trim();
+	}
+
+	public String getMealrangeid() {
+		return mealrangeid;
+	}
+
+	public void setMealrangeid(String mealrangeid) {
+		this.mealrangeid = mealrangeid == null ? null : mealrangeid.trim();
+	}
+
+	public String getPinyin() {
+		return pinyin;
+	}
+
+	public void setPinyin(String pinyin) {
+		this.pinyin = pinyin == null ? null : pinyin.trim();
+	}
+
+	public String getContactmobile() {
+		return contactmobile;
+	}
+
+	public void setContactmobile(String contactmobile) {
+		this.contactmobile = contactmobile == null ? null : contactmobile.trim();
+	}
+
+	public Integer getSignedstatus() {
+		return signedstatus;
+	}
+
+	public void setSignedstatus(Integer signedstatus) {
+		this.signedstatus = signedstatus;
+	}
+
+	public Integer getElevator() {
+		return elevator;
+	}
+
+	public void setElevator(Integer elevator) {
+		this.elevator = elevator;
+	}
+
+	public Date getSigningenddate() {
+		return signingenddate;
+	}
+
+	public void setSigningenddate(Date signingenddate) {
+		this.signingenddate = signingenddate;
+	}
+
+	public Integer getStair() {
+		return stair;
+	}
+
+	public void setStair(Integer stair) {
+		this.stair = stair;
+	}
+
+	public Date getSyenddate() {
+		return syenddate;
+	}
+
+	public void setSyenddate(Date syenddate) {
+		this.syenddate = syenddate;
+	}
+
+	public Date getSystartdate() {
+		return systartdate;
+	}
+
+	public void setSystartdate(Date systartdate) {
+		this.systartdate = systartdate;
+	}
+
+	public Integer getFloornum() {
+		return floornum;
+	}
+
+	public void setFloornum(Integer floornum) {
+		this.floornum = floornum;
+	}
+
+	public String getSycompanyname() {
+		return sycompanyname;
+	}
+
+	public void setSycompanyname(String sycompanyname) {
+		this.sycompanyname = sycompanyname == null ? null : sycompanyname.trim();
+	}
+
+	public Integer getApplytrashbinnum() {
+		return applytrashbinnum;
+	}
+
+	public void setApplytrashbinnum(Integer applytrashbinnum) {
+		this.applytrashbinnum = applytrashbinnum;
+	}
+
+	public Integer getDatasource() {
+		return datasource;
+	}
+
+	public void setDatasource(Integer datasource) {
+		this.datasource = datasource;
+	}
+
+	public String getPaperfileids() {
+		return paperfileids;
+	}
+
+	public void setPaperfileids(String paperfileids) {
+		this.paperfileids = paperfileids == null ? null : paperfileids.trim();
+	}
+
+	public String getPaperfilenames() {
+		return paperfilenames;
+	}
+
+	public void setPaperfilenames(String paperfilenames) {
+		this.paperfilenames = paperfilenames == null ? null : paperfilenames.trim();
+	}
+
+	public String getCreditassessrecord() {
+		return creditassessrecord;
+	}
+
+	public void setCreditassessrecord(String creditassessrecord) {
+		this.creditassessrecord = creditassessrecord == null ? null : creditassessrecord.trim();
+	}
+
+	@Override
+	public String toString() {
+		return "RestaurantInfo [id=" + id + ", createtime=" + createtime + ", lastchangetime=" + lastchangetime
+				+ ", status=" + status + ", beendeleted=" + beendeleted + ", deletedtime=" + deletedtime + ", address="
+				+ address + ", businessarea=" + businessarea + ", closedate=" + closedate + ", code=" + code
+				+ ", collectfrequency=" + collectfrequency + ", complaintshotline=" + complaintshotline
+				+ ", contactperson=" + contactperson + ", contactphone=" + contactphone + ", contractlength="
+				+ contractlength + ", contractno=" + contractno + ", dailyoutput=" + dailyoutput
+				+ ", dailyoutputwasteoil=" + dailyoutputwasteoil + ", documentno=" + documentno + ", endcollecttime="
+				+ endcollecttime + ", hygieniclicensedate=" + hygieniclicensedate + ", iscollectscdoil="
+				+ iscollectscdoil + ", lastcollectdatetime=" + lastcollectdatetime + ", latitude=" + latitude
+				+ ", latitudedone=" + latitudedone + ", legalrepresentative=" + legalrepresentative + ", longitude="
+				+ longitude + ", longitudedone=" + longitudedone + ", mealrange=" + mealrange + ", name=" + name
+				+ ", opendate=" + opendate + ", orderindex=" + orderindex + ", permit=" + permit + ", permitno="
+				+ permitno + ", phonenumber=" + phonenumber + ", photofile=" + photofile + ", photoids=" + photoids
+				+ ", remain=" + remain + ", remarks=" + remarks + ", scale=" + scale + ", signingdate=" + signingdate
+				+ ", starlevel=" + starlevel + ", startcollecttime=" + startcollecttime + ", sycompanyid=" + sycompanyid
+				+ ", sycompanyfile=" + sycompanyfile + ", trashbinnum=" + trashbinnum + ", type=" + type + ", wasteoil="
+				+ wasteoil + ", classesid=" + classesid + ", documenttypeid=" + documenttypeid + ", streetid="
+				+ streetid + ", logout=" + logout + ", logouttime=" + logouttime + ", sourcetime=" + sourcetime
+				+ ", sourcetype=" + sourcetype + ", contacttel=" + contacttel + ", legalmanfileids=" + legalmanfileids
+				+ ", legalmanphone=" + legalmanphone + ", legalmantel=" + legalmantel + ", sourcemanid=" + sourcemanid
+				+ ", endcollecttime2=" + endcollecttime2 + ", files=" + files + ", mealtime=" + mealtime
+				+ ", restaurantaddress=" + restaurantaddress + ", startcollecttime2=" + startcollecttime2
+				+ ", unitaddress=" + unitaddress + ", unitname=" + unitname + ", lastcollectcarcode="
+				+ lastcollectcarcode + ", lastcollectcarid=" + lastcollectcarid + ", mealrangedisplayvalue="
+				+ mealrangedisplayvalue + ", mealrangeid=" + mealrangeid + ", pinyin=" + pinyin + ", contactmobile="
+				+ contactmobile + ", signedstatus=" + signedstatus + ", elevator=" + elevator + ", signingenddate="
+				+ signingenddate + ", stair=" + stair + ", syenddate=" + syenddate + ", systartdate=" + systartdate
+				+ ", floornum=" + floornum + ", sycompanyname=" + sycompanyname + ", applytrashbinnum="
+				+ applytrashbinnum + ", datasource=" + datasource + ", paperfileids=" + paperfileids
+				+ ", paperfilenames=" + paperfilenames + ", creditassessrecord=" + creditassessrecord + "]";
+	}
+
+}

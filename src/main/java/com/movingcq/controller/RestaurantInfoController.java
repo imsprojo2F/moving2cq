@@ -149,7 +149,7 @@ public class RestaurantInfoController {
 	}
 
 	@ResponseBody
-	@RequestMapping("listAll")
+	@RequestMapping("listAllRest")
 	public Map<String, Object> listAll(HttpServletRequest request) {
 
 		List<RestaurantInfo> allList1 = restInfoService.listAllRestInfo(qMap);

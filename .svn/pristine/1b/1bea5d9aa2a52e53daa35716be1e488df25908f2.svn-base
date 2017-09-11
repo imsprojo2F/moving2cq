@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movingcq.dao.TrashDetailMapper">
+
+	<resultMap id="BaseResultMap" type="com.movingcq.entity.TrashCollectionDetailInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="restaurant_id" property="restaurant_id" jdbcType="INTEGER" />
+		<result column="vehicle_number" property="vehicle_number" jdbcType="VARCHAR" />
+		<result column="bucket_id" property="bucket_id" jdbcType="INTEGER" />
+		<result column="rfid" property="rfid" jdbcType="VARCHAR" />
+		<result column="gross_weight" property="gross_weight" jdbcType="DOUBLE" />
+		<result column="net_weight" property="net_weight" jdbcType="DOUBLE" />
+		<result column="tare_weight" property="tare_weight" jdbcType="DOUBLE" />
+		<result column="weight_time" property="weight_time" jdbcType="TIMESTAMP" />
+		<result column="gross_weight_time" property="gross_weight_time" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, restaurant_id, vehicle_number, bucket_id, rfid,gross_weight,net_weight,tare_weight,weight_time,
+		gross_weight_time,create_time,update_time
+	</sql>
+	
+
+	<select id="listAllTrash" resultType="java.util.Map"  parameterType="java.util.Map">
+		select t.id,t.restaurant_id,t.gross_weight,t.gross_weight_time,t.create_time,t.tare_weight,t.weight_time,t.net_weight,t.vehicle_number,
+		r.last_used_barrel,r.name,r.area_name,r.street_name, 
+		b.bucket_code 
+		from trash_collection_detail t,restaurant_info r,bucket_info b where t.restaurant_id=r.id and t.bucket_id=b.id  
+		<if test="key_area !=null">  
+	       	and r.area_name like '%${key_area}%'  
+	    </if> 
+		<if test="key_company !=null">  
+	       	and r.name like '%${key_company}%'  
+	    </if>
+	    <if test="key_company_id !=null">  
+	       	and t.restaurant_id = ${key_company_id}  
+	    </if>
+	    <if test="key_startDate !=null">  
+	       	and t.create_time between '${key_startDate}' and '${key_endDate}'  
+	    </if>
+	</select>
+	
+	<select id="selectByPage" parameterType="java.util.Map" resultType="java.util.Map">
+		select t.id,t.restaurant_id,t.gross_weight,t.gross_weight_time,t.create_time,t.tare_weight,t.weight_time,t.net_weight,t.vehicle_number,
+		r.id,r.last_used_barrel,r.name,r.area_name,r.street_name, 
+		b.bucket_code 
+		from trash_collection_detail t,restaurant_info r,bucket_info b where t.restaurant_id=r.id and t.bucket_id=b.id  
+		<if test="key_area !=null">  
+	       	and r.area_name like '%${key_area}%'  
+	    </if> 
+		<if test="key_company !=null">  
+	       	and r.name like '%${key_company}%'  
+	    </if>
+	    <if test="key_company_id !=null">  
+	       	and t.restaurant_id = ${key_company_id}  
+	    </if>
+	    <if test="key_startDate !=null">  
+	       	and t.create_time between '${key_startDate}' and '${key_endDate}'  
+	    </if>
+		Order by ${sort} ${dir}
+		LIMIT ${page},${rows}
+	</select>
+	
+	<!-- 获取餐厅id，去重 -->
+	<select id="selectByDistinct"  resultType="java.util.Map" parameterType="java.util.Map">
+		select DISTINCT restaurant_id from trash_collection_detail where 1=1
+		<if test="key_endDate !=null">  
+	       	  and create_time between '${key_startDate}' and '${key_endDate}'
+	    </if>
+		<if test="key_Date !=null">  
+	       	and create_time LIKE '%${key_Date}%'  
+	    </if>
+	    <if test="key_company_id !=null">  
+	       	and restaurant_id = ${key_company_id}  
+	    </if>  
+	</select>
+	
+	<select id="selectDistinctByPage" parameterType="java.util.Map" resultType="java.util.Map">
+		select DISTINCT restaurant_id from trash_collection_detail	where 1=1	
+		<if test="key_area !=null">  
+	       	and area_name like '%${key_area}%'  
+	    </if> 
+		<if test="key_company !=null">  
+	       	and name like '%${key_company}%'  
+	    </if>
+	    <if test="key_company_id !=null">  
+	       	and restaurant_id = ${key_company_id}  
+	    </if>
+	    <if test="key_startDate !=null">  
+	       	and create_time between '${key_startDate}' and '${key_endDate}'  
+	    </if>
+	    <if test="key_Date !=null">  
+	       	and create_time LIKE '%${key_Date}%'  
+	    </if>
+		Order by ${sort} ${dir}
+		LIMIT ${page},${rows}
+	</select>
+	
+	<!-- 获取餐厅每天数据 -->
+	<select id="selectByDistinctDate"  resultType="java.util.Map" parameterType="java.util.Map">
+		select t.id,t.restaurant_id,t.gross_weight,t.gross_weight_time,t.create_time,t.tare_weight,t.weight_time,t.net_weight,t.vehicle_number,
+		r.last_used_barrel,r.name,r.area_name,r.street_name, 
+		b.bucket_code
+		from trash_collection_detail t,restaurant_info r,bucket_info b where t.restaurant_id=r.id and t.bucket_id=b.id   
+		<if test="key_shopId !=null">  
+	       	and r.id =${key_shopId} and t.restaurant_id=${key_shopId}  
+	    </if>
+	    <if test="key_Date !=null">  
+	       	and t.create_time LIKE '%${key_Date}%'  
+	    </if>
+	</select>
+	
+	<select id="selectDistinctDateByPage" parameterType="java.util.Map" resultType="java.util.Map">
+		select t.id,t.restaurant_id,t.gross_weight,t.gross_weight_time,t.create_time,t.tare_weight,t.weight_time,t.net_weight,t.vehicle_number,
+		r.last_used_barrel,r.name,r.area_name,r.street_name, 
+		b.bucket_code 
+		from trash_collection_detail t,restaurant_info r,bucket_info b where t.restaurant_id=r.id and t.bucket_id=b.id  	
+		<if test="key_shopId !=null">  
+	       	and r.id =${key_shopId} and t.restaurant_id=${key_shopId}  
+	    </if>
+
+	    <if test="key_Date !=null">  
+	       	and t.create_time LIKE '%${key_Date}%'  
+	    </if>
+		Order by ${sort} ${dir}
+		LIMIT ${page},${rows}
+	</select>
+	
+	<select id="selectPutByDay" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *,SUM(t.net_weight) as dayPut from trash_collection_detail t,restaurant_info r  where 1=1 	
+		<if test="restaurant_id !=null">  
+	      and t.restaurant_id=${restaurant_id} and r.id=  ${restaurant_id}
+	    </if>
+	    <if test="key_Date !=null">  
+	       	and t.create_time LIKE '%${key_Date}%'  
+	    </if>
+	</select>
+	
+	<select id="listRestById" resultType="java.util.Map"  parameterType="java.util.Map">
+		select * from restaurant_info  
+		<if test="id !=null">
+			where id=${id}
+		</if>
+	</select>
+
+	<insert id="insertTrash" parameterType="com.movingcq.entity.TrashCollectionDetailInfo">
+		insert into trash_collection_detail (
+		restaurant_id,vehicle_number, bucket_id,
+		rfid,,gross_weight,net_weight,tare_weight,weight_time,gross_weight_time,create_time, update_time
+		)
+		values
+		(
+		#{restaurant_id,jdbcType=INTEGER},
+		#{vehicle_number,jdbcType=VARCHAR},
+		#{bucket_id,jdbcType=INTEGER},
+		#{rfid,jdbcType=VARCHAR},
+		#{gross_weight,jdbcType=DOUBLE},
+		#{net_weight,jdbcType=DOUBLE},
+		#{tare_weight,jdbcType=DOUBLE},
+		#{weight_time,jdbcType=TIMESTAMP},
+		#{gross_weight_time,jdbcType=TIMESTAMP},
+		#{create_time,jdbcType=TIMESTAMP}, 
+		#{update_time,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		<![CDATA[DELETE from trash_collection_detail where id in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="updateById" parameterType="com.movingcq.entity.TrashCollectionDetailInfo">
+		update trash_collection_detail
+		<set>
+			<if test="restaurant_id != null">
+				restaurant_id = #{restaurant_id,jdbcType=INTEGER},
+			</if>
+			<if test="vehicle_number != null">
+				vehicle_number = #{vehicle_number,jdbcType=VARCHAR},
+			</if>
+			<if test="bucket_id != null">
+				bucket_id = #{bucket_id,jdbcType=INTEGER},
+			</if>
+			<if test="rfid != null">
+				rfid = #{rfid,jdbcType=VARCHAR},
+			</if>
+			<if test="gross_weight != null">
+				gross_weight = #{gross_weight,jdbcType=DOUBLE},
+			</if>
+			<if test="net_weight != null">
+				net_weight = #{net_weight,jdbcType=DOUBLE},
+			</if>
+			<if test="tare_weight != null">
+				tare_weight = #{tare_weight,jdbcType=DOUBLE},
+			</if>
+			<if test="weight_time != null">
+				weight_time = #{weight_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gross_weight_time != null">
+				gross_weight_time = #{gross_weight_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.ParameterRecordMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.ParameterRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="displayValue" jdbcType="VARCHAR" property="displayvalue" />
+    <result column="orderIndex" jdbcType="INTEGER" property="orderindex" />
+    <result column="parameterValueType" jdbcType="VARCHAR" property="parametervaluetype" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, description, displayValue, 
+    orderIndex, parameterValueType, value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parameter_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from parameter_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.ParameterRecord">
+    insert into parameter_record (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      description, displayValue, orderIndex, 
+      parameterValueType, value)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{displayvalue,jdbcType=VARCHAR}, #{orderindex,jdbcType=INTEGER}, 
+      #{parametervaluetype,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.ParameterRecord">
+    insert into parameter_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="displayvalue != null">
+        displayValue,
+      </if>
+      <if test="orderindex != null">
+        orderIndex,
+      </if>
+      <if test="parametervaluetype != null">
+        parameterValueType,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="displayvalue != null">
+        #{displayvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="orderindex != null">
+        #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="parametervaluetype != null">
+        #{parametervaluetype,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.ParameterRecord">
+    update parameter_record
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="displayvalue != null">
+        displayValue = #{displayvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="orderindex != null">
+        orderIndex = #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="parametervaluetype != null">
+        parameterValueType = #{parametervaluetype,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.ParameterRecord">
+    update parameter_record
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      displayValue = #{displayvalue,jdbcType=VARCHAR},
+      orderIndex = #{orderindex,jdbcType=INTEGER},
+      parameterValueType = #{parametervaluetype,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

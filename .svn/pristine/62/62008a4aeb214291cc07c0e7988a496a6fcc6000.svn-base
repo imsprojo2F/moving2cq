@@ -1,0 +1,49 @@
+package com.movingcq.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.movingcq.entity.QueryParameters;
+import com.movingcq.entity.RestaurantInfo;
+import com.movingcq.entity.SysUser;
+
+public interface RestInfoMapper {
+
+	SysUser selectByPrimaryKey(Integer id);
+
+	SysUser login(SysUser record);
+
+	SysUser selectByAccount(String userAccount);
+
+	/**
+	 * @param sysUser
+	 * @return
+	 */
+	int insert(RestaurantInfo rInfo);
+
+	int insertByCode(String code, String fileName, String filepath);
+
+	/**
+	 * @param ids
+	 * @return
+	 */
+	int deleteById(String[] ids);
+
+	/**
+	 * @param sysUser
+	 * @return
+	 */
+	int updateById(RestaurantInfo rInfo);
+
+	int updateByCode(RestaurantInfo rInfo);
+
+	int updateByDynamic(Map<String, String> map);
+
+	int updateFilePath(String uuid, String fileName, String filepath);
+
+	int delFilePath(String uuid);
+
+	List<RestaurantInfo> listAllRestInfo(QueryParameters qParameters);
+
+	List<RestaurantInfo> selectByPage(QueryParameters qParameters);
+}

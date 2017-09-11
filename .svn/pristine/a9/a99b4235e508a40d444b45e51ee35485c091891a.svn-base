@@ -1,0 +1,25 @@
+#是否执行 mongo 插入
+mongoActive=off
+#mongo是否采用集群
+mongoCluster=on
+#mongo用户信息
+mongoDB=test
+mongoUser=user1
+mongoPassword=12345688
+#mongo server
+mongoServerList=10.251.131.76:27017;10.174.244.232:27017;10.174.244.232:27019
+
+#是否本地执行 mongo 插入
+xmMongoActive=on
+#mongo是否采用集群
+xmMongoCluster=off
+#mongo用户信息
+xmMongoDB=test
+xmMongoUser=user1
+xmMongoPassword=12345688
+#mongo server
+xmMongoServerList=ryanding.51vip.biz:11110
+
+recipient=540896980@qq.com,56070873@qq.com
+
+ips=10.251.131.76

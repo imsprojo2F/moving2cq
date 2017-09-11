@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.RfidInfoMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.RfidInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="cardBindingDate" jdbcType="VARCHAR" property="cardbindingdate" />
+    <result column="orderIndex" jdbcType="INTEGER" property="orderindex" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="rfidCode" jdbcType="VARCHAR" property="rfidcode" />
+    <result column="rfidStatus" jdbcType="VARCHAR" property="rfidstatus" />
+    <result column="trashbinModel" jdbcType="VARCHAR" property="trashbinmodel" />
+    <result column="trashWeight" jdbcType="VARCHAR" property="trashweight" />
+    <result column="beenMark" jdbcType="INTEGER" property="beenmark" />
+    <result column="restaurantId" jdbcType="VARCHAR" property="restaurantId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, cardBindingDate, 
+    orderIndex, remarks, rfidCode, rfidStatus, trashbinModel, trashWeight, beenMark,restaurantId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rfid_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rfid_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.RfidInfo">
+    insert into rfid_info (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      cardBindingDate, orderIndex, remarks, 
+      rfidCode, rfidStatus, trashbinModel, 
+      trashWeight, beenMark,restaurantId)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{cardbindingdate,jdbcType=VARCHAR}, #{orderindex,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
+      #{rfidcode,jdbcType=VARCHAR}, #{rfidstatus,jdbcType=VARCHAR}, #{trashbinmodel,jdbcType=VARCHAR}, 
+      #{trashweight,jdbcType=VARCHAR}, #{beenmark,jdbcType=INTEGER}, #{restaurantId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.RfidInfo">
+    insert into rfid_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="cardbindingdate != null">
+        cardBindingDate,
+      </if>
+      <if test="orderindex != null">
+        orderIndex,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="rfidcode != null">
+        rfidCode,
+      </if>
+      <if test="rfidstatus != null">
+        rfidStatus,
+      </if>
+      <if test="trashbinmodel != null">
+        trashbinModel,
+      </if>
+      <if test="trashweight != null">
+        trashWeight,
+      </if>
+      <if test="beenmark != null">
+        beenMark,
+      </if>
+      <if test="restaurantId != null">
+        restaurant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardbindingdate != null">
+        #{cardbindingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderindex != null">
+        #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidcode != null">
+        #{rfidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidstatus != null">
+        #{rfidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="trashbinmodel != null">
+        #{trashbinmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="trashweight != null">
+        #{trashweight,jdbcType=VARCHAR},
+      </if>
+      <if test="beenmark != null">
+        #{beenmark,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantId != null">
+        #{restaurantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.movingcq.entity.RfidInfo">
+    update rfid_info
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardbindingdate != null">
+        cardBindingDate = #{cardbindingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderindex != null">
+        orderIndex = #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidcode != null">
+        rfidCode = #{rfidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidstatus != null">
+        rfidStatus = #{rfidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="trashbinmodel != null">
+        trashbinModel = #{trashbinmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="trashweight != null">
+        trashWeight = #{trashweight,jdbcType=VARCHAR},
+      </if>
+      <if test="beenmark != null">
+        beenMark = #{beenmark,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantId != null">
+        restaurantId = #{restaurantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.RfidInfo">
+    update rfid_info
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      cardBindingDate = #{cardbindingdate,jdbcType=VARCHAR},
+      orderIndex = #{orderindex,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      rfidCode = #{rfidcode,jdbcType=VARCHAR},
+      rfidStatus = #{rfidstatus,jdbcType=VARCHAR},
+      trashbinModel = #{trashbinmodel,jdbcType=VARCHAR},
+      trashWeight = #{trashweight,jdbcType=VARCHAR},
+      beenMark = #{beenmark,jdbcType=INTEGER},
+      restaurantId = #{restaurantId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByRfid" resultMap="BaseResultMap" >
+		select * from rfid_info 
+			where rfidCode = #{0}
+  </select>
+  
+  <select id="listAllRfid" resultMap="BaseResultMap"  parameterType="Map">
+		select * from rfid_info  where 1=1 and beenDeleted=0
+		<if test="key !=null and key!=''">
+			and rfidCode like '%${key}%'
+		</if>
+	</select>
+	
+	<select id="selectByPage" parameterType="Map" resultType="Map">
+		select * from rfid_info  where 1=1	and beenDeleted=0
+		
+		<if test="key !=null and key!=''">
+			and rfidCode like '%${key}%' 
+		</if>
+		<if test="sort !=null and sort!='' ">
+			Order by ${sort} ${dir}
+		</if>
+		
+		LIMIT ${pageNow},${pageSize}
+	</select>
+	
+	<select id="listUnUseRfid" resultMap="BaseResultMap" >
+		<!-- select * from rfid_info 
+			where  beenDeleted = 0 and rfidStatus='IN_USE' -->
+		<![CDATA[select * from rfid_info where beenDeleted = 0 and rfidStatus='IN_USE' and rfidCode not in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+		ORDER BY createTime
+		LIMIT 0,200
+  </select>
+  
+  <select id="selectById" resultType="java.lang.Integer">
+  	select count(*) from rfid_info where id=#{0}
+  </select>
+  
+</mapper>

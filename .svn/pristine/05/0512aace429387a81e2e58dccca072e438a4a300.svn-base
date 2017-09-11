@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.RestInfoMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.RestaurantInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="businessArea" jdbcType="REAL" property="businessarea" />
+    <result column="closeDate" jdbcType="TIMESTAMP" property="closedate" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="collectFrequency" jdbcType="REAL" property="collectfrequency" />
+    <result column="complaintsHotline" jdbcType="VARCHAR" property="complaintshotline" />
+    <result column="contactPerson" jdbcType="VARCHAR" property="contactperson" />
+    <result column="contactPhone" jdbcType="VARCHAR" property="contactphone" />
+    <result column="contractLength" jdbcType="REAL" property="contractlength" />
+    <result column="contractNo" jdbcType="VARCHAR" property="contractno" />
+    <result column="dailyOutput" jdbcType="REAL" property="dailyoutput" />
+    <result column="dailyOutPutWasteOil" jdbcType="REAL" property="dailyoutputwasteoil" />
+    <result column="documentNo" jdbcType="VARCHAR" property="documentno" />
+    <result column="endCollectTime" jdbcType="TIMESTAMP" property="endcollecttime" />
+    <result column="hygienicLicenseDate" jdbcType="TIMESTAMP" property="hygieniclicensedate" />
+    <result column="isCollectScdOil" jdbcType="INTEGER" property="iscollectscdoil" />
+    <result column="lastCollectDateTime" jdbcType="TIMESTAMP" property="lastcollectdatetime" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="latitudeDone" jdbcType="DOUBLE" property="latitudedone" />
+    <result column="legalRepresentative" jdbcType="VARCHAR" property="legalrepresentative" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="longitudeDone" jdbcType="DOUBLE" property="longitudedone" />
+    <result column="mealRange" jdbcType="VARCHAR" property="mealrange" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="openDate" jdbcType="TIMESTAMP" property="opendate" />
+    <result column="orderIndex" jdbcType="INTEGER" property="orderindex" />
+    <result column="permit" jdbcType="INTEGER" property="permit" />
+    <result column="permitNo" jdbcType="VARCHAR" property="permitno" />
+    <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="photoFile" jdbcType="VARCHAR" property="photofile" />
+    <result column="photoIds" jdbcType="VARCHAR" property="photoids" />
+    <result column="remain" jdbcType="REAL" property="remain" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="scale" jdbcType="VARCHAR" property="scale" />
+    <result column="signingDate" jdbcType="TIMESTAMP" property="signingdate" />
+    <result column="starLevel" jdbcType="VARCHAR" property="starlevel" />
+    <result column="startCollectTime" jdbcType="TIMESTAMP" property="startcollecttime" />
+    <result column="syCompanyid" jdbcType="VARCHAR" property="sycompanyid" />
+    <result column="syCompanyFile" jdbcType="VARCHAR" property="sycompanyfile" />
+    <result column="trashBinNum" jdbcType="INTEGER" property="trashbinnum" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="wasteOil" jdbcType="REAL" property="wasteoil" />
+    <result column="classesId" jdbcType="VARCHAR" property="classesid" />
+    <result column="documentTypeId" jdbcType="VARCHAR" property="documenttypeid" />
+    <result column="streetId" jdbcType="VARCHAR" property="streetid" />
+    <result column="logout" jdbcType="INTEGER" property="logout" />
+    <result column="logoutTime" jdbcType="TIMESTAMP" property="logouttime" />
+    <result column="sourceTime" jdbcType="TIMESTAMP" property="sourcetime" />
+    <result column="sourceType" jdbcType="INTEGER" property="sourcetype" />
+    <result column="contactTel" jdbcType="VARCHAR" property="contacttel" />
+    <result column="legalManFileIds" jdbcType="VARCHAR" property="legalmanfileids" />
+    <result column="legalManPhone" jdbcType="VARCHAR" property="legalmanphone" />
+    <result column="legalManTel" jdbcType="VARCHAR" property="legalmantel" />
+    <result column="sourceManId" jdbcType="VARCHAR" property="sourcemanid" />
+    <result column="endCollectTime2" jdbcType="TIMESTAMP" property="endcollecttime2" />
+    <result column="files" jdbcType="VARCHAR" property="files" />
+    <result column="mealTime" jdbcType="TIMESTAMP" property="mealtime" />
+    <result column="restaurantAddress" jdbcType="VARCHAR" property="restaurantaddress" />
+    <result column="startCollectTime2" jdbcType="TIMESTAMP" property="startcollecttime2" />
+    <result column="unitAddress" jdbcType="VARCHAR" property="unitaddress" />
+    <result column="unitName" jdbcType="VARCHAR" property="unitname" />
+    <result column="lastCollectCarCode" jdbcType="VARCHAR" property="lastcollectcarcode" />
+    <result column="lastCollectCarId" jdbcType="VARCHAR" property="lastcollectcarid" />
+    <result column="mealRangeDisplayValue" jdbcType="VARCHAR" property="mealrangedisplayvalue" />
+    <result column="mealRangeId" jdbcType="VARCHAR" property="mealrangeid" />
+    <result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
+    <result column="contactMobile" jdbcType="VARCHAR" property="contactmobile" />
+    <result column="signedStatus" jdbcType="INTEGER" property="signedstatus" />
+    <result column="elevator" jdbcType="INTEGER" property="elevator" />
+    <result column="signingEndDate" jdbcType="TIMESTAMP" property="signingenddate" />
+    <result column="stair" jdbcType="INTEGER" property="stair" />
+    <result column="syEndDate" jdbcType="TIMESTAMP" property="syenddate" />
+    <result column="syStartDate" jdbcType="TIMESTAMP" property="systartdate" />
+    <result column="floorNum" jdbcType="INTEGER" property="floornum" />
+    <result column="syCompanyName" jdbcType="VARCHAR" property="sycompanyname" />
+    <result column="applyTrashBinNum" jdbcType="INTEGER" property="applytrashbinnum" />
+    <result column="dataSource" jdbcType="INTEGER" property="datasource" />
+    <result column="paperFileIds" jdbcType="VARCHAR" property="paperfileids" />
+    <result column="paperFileNames" jdbcType="VARCHAR" property="paperfilenames" />
+    <result column="creditAssessRecord" jdbcType="VARCHAR" property="creditassessrecord" />
+    <result column="areaId" jdbcType="VARCHAR" property="areaId" />
+    <result column="areaName" jdbcType="VARCHAR" property="areaName" />
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, address, businessArea, 
+    closeDate, code, collectFrequency, complaintsHotline, contactPerson, contactPhone, 
+    contractLength, contractNo, dailyOutput, dailyOutPutWasteOil, documentNo, endCollectTime, 
+    hygienicLicenseDate, isCollectScdOil, lastCollectDateTime, latitude, latitudeDone, 
+    legalRepresentative, longitude, longitudeDone, mealRange, name, openDate, orderIndex, 
+    permit, permitNo, phoneNumber, photoFile, photoIds, remain, remarks, scale, signingDate, 
+    starLevel, startCollectTime, syCompanyid, syCompanyFile, trashBinNum, type, wasteOil, 
+    classesId, documentTypeId, streetId, logout, logoutTime, sourceTime, sourceType, 
+    contactTel, legalManFileIds, legalManPhone, legalManTel, sourceManId, endCollectTime2, 
+    files, mealTime, restaurantAddress, startCollectTime2, unitAddress, unitName, lastCollectCarCode, 
+    lastCollectCarId, mealRangeDisplayValue, mealRangeId, pinyin, contactMobile, signedStatus, 
+    elevator, signingEndDate, stair, syEndDate, syStartDate, floorNum, syCompanyName, 
+    applyTrashBinNum, dataSource, paperFileIds, paperFileNames, creditAssessRecord,areaId,areaName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from restaurant_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from restaurant_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.RestaurantInfo">
+    insert into restaurant_info (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      address, businessArea, closeDate, 
+      code, collectFrequency, complaintsHotline, 
+      contactPerson, contactPhone, contractLength, 
+      contractNo, dailyOutput, dailyOutPutWasteOil, 
+      documentNo, endCollectTime, hygienicLicenseDate, 
+      isCollectScdOil, lastCollectDateTime, latitude, 
+      latitudeDone, legalRepresentative, longitude, 
+      longitudeDone, mealRange, name, 
+      openDate, orderIndex, permit, 
+      permitNo, phoneNumber, photoFile, 
+      photoIds, remain, remarks, 
+      scale, signingDate, starLevel, 
+      startCollectTime, syCompanyid, syCompanyFile, 
+      trashBinNum, type, wasteOil, 
+      classesId, documentTypeId, streetId, 
+      logout, logoutTime, sourceTime, 
+      sourceType, contactTel, legalManFileIds, 
+      legalManPhone, legalManTel, sourceManId, 
+      endCollectTime2, files, mealTime, 
+      restaurantAddress, startCollectTime2, unitAddress, 
+      unitName, lastCollectCarCode, lastCollectCarId, 
+      mealRangeDisplayValue, mealRangeId, pinyin, 
+      contactMobile, signedStatus, elevator, 
+      signingEndDate, stair, syEndDate, 
+      syStartDate, floorNum, syCompanyName, 
+      applyTrashBinNum, dataSource, paperFileIds, 
+      paperFileNames, creditAssessRecord,areaId,areaName)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{address,jdbcType=VARCHAR}, #{businessarea,jdbcType=REAL}, #{closedate,jdbcType=TIMESTAMP}, 
+      #{code,jdbcType=VARCHAR}, #{collectfrequency,jdbcType=REAL}, #{complaintshotline,jdbcType=VARCHAR}, 
+      #{contactperson,jdbcType=VARCHAR}, #{contactphone,jdbcType=VARCHAR}, #{contractlength,jdbcType=REAL}, 
+      #{contractno,jdbcType=VARCHAR}, #{dailyoutput,jdbcType=REAL}, #{dailyoutputwasteoil,jdbcType=REAL}, 
+      #{documentno,jdbcType=VARCHAR}, #{endcollecttime,jdbcType=TIMESTAMP}, #{hygieniclicensedate,jdbcType=TIMESTAMP}, 
+      #{iscollectscdoil,jdbcType=INTEGER}, #{lastcollectdatetime,jdbcType=TIMESTAMP}, #{latitude,jdbcType=DOUBLE}, 
+      #{latitudedone,jdbcType=DOUBLE}, #{legalrepresentative,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, 
+      #{longitudedone,jdbcType=DOUBLE}, #{mealrange,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{opendate,jdbcType=TIMESTAMP}, #{orderindex,jdbcType=INTEGER}, #{permit,jdbcType=INTEGER}, 
+      #{permitno,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, #{photofile,jdbcType=VARCHAR}, 
+      #{photoids,jdbcType=VARCHAR}, #{remain,jdbcType=REAL}, #{remarks,jdbcType=VARCHAR}, 
+      #{scale,jdbcType=VARCHAR}, #{signingdate,jdbcType=TIMESTAMP}, #{starlevel,jdbcType=VARCHAR}, 
+      #{startcollecttime,jdbcType=TIMESTAMP}, #{sycompanyid,jdbcType=VARCHAR}, #{sycompanyfile,jdbcType=VARCHAR}, 
+      #{trashbinnum,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{wasteoil,jdbcType=REAL}, 
+      #{classesid,jdbcType=VARCHAR}, #{documenttypeid,jdbcType=VARCHAR}, #{streetid,jdbcType=VARCHAR}, 
+      #{logout,jdbcType=INTEGER}, #{logouttime,jdbcType=TIMESTAMP}, #{sourcetime,jdbcType=TIMESTAMP}, 
+      #{sourcetype,jdbcType=INTEGER}, #{contacttel,jdbcType=VARCHAR}, #{legalmanfileids,jdbcType=VARCHAR}, 
+      #{legalmanphone,jdbcType=VARCHAR}, #{legalmantel,jdbcType=VARCHAR}, #{sourcemanid,jdbcType=VARCHAR}, 
+      #{endcollecttime2,jdbcType=TIMESTAMP}, #{files,jdbcType=VARCHAR}, #{mealtime,jdbcType=TIMESTAMP}, 
+      #{restaurantaddress,jdbcType=VARCHAR}, #{startcollecttime2,jdbcType=TIMESTAMP}, #{unitaddress,jdbcType=VARCHAR}, 
+      #{unitname,jdbcType=VARCHAR}, #{lastcollectcarcode,jdbcType=VARCHAR}, #{lastcollectcarid,jdbcType=VARCHAR}, 
+      #{mealrangedisplayvalue,jdbcType=VARCHAR}, #{mealrangeid,jdbcType=VARCHAR}, #{pinyin,jdbcType=VARCHAR}, 
+      #{contactmobile,jdbcType=VARCHAR}, #{signedstatus,jdbcType=INTEGER}, #{elevator,jdbcType=INTEGER}, 
+      #{signingenddate,jdbcType=TIMESTAMP}, #{stair,jdbcType=INTEGER}, #{syenddate,jdbcType=TIMESTAMP}, 
+      #{systartdate,jdbcType=TIMESTAMP}, #{floornum,jdbcType=INTEGER}, #{sycompanyname,jdbcType=VARCHAR}, 
+      #{applytrashbinnum,jdbcType=INTEGER}, #{datasource,jdbcType=INTEGER}, #{paperfileids,jdbcType=VARCHAR}, 
+      #{paperfilenames,jdbcType=VARCHAR}, #{creditassessrecord,jdbcType=VARCHAR},
+      #{areaId,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR},
+      #{areaName,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.RestaurantInfo">
+    insert into restaurant_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="businessarea != null">
+        businessArea,
+      </if>
+      <if test="closedate != null">
+        closeDate,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="collectfrequency != null">
+        collectFrequency,
+      </if>
+      <if test="complaintshotline != null">
+        complaintsHotline,
+      </if>
+      <if test="contactperson != null">
+        contactPerson,
+      </if>
+      <if test="contactphone != null">
+        contactPhone,
+      </if>
+      <if test="contractlength != null">
+        contractLength,
+      </if>
+      <if test="contractno != null">
+        contractNo,
+      </if>
+      <if test="dailyoutput != null">
+        dailyOutput,
+      </if>
+      <if test="dailyoutputwasteoil != null">
+        dailyOutPutWasteOil,
+      </if>
+      <if test="documentno != null">
+        documentNo,
+      </if>
+      <if test="endcollecttime != null">
+        endCollectTime,
+      </if>
+      <if test="hygieniclicensedate != null">
+        hygienicLicenseDate,
+      </if>
+      <if test="iscollectscdoil != null">
+        isCollectScdOil,
+      </if>
+      <if test="lastcollectdatetime != null">
+        lastCollectDateTime,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="latitudedone != null">
+        latitudeDone,
+      </if>
+      <if test="legalrepresentative != null">
+        legalRepresentative,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="longitudedone != null">
+        longitudeDone,
+      </if>
+      <if test="mealrange != null">
+        mealRange,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="opendate != null">
+        openDate,
+      </if>
+      <if test="orderindex != null">
+        orderIndex,
+      </if>
+      <if test="permit != null">
+        permit,
+      </if>
+      <if test="permitno != null">
+        permitNo,
+      </if>
+      <if test="phonenumber != null">
+        phoneNumber,
+      </if>
+      <if test="photofile != null">
+        photoFile,
+      </if>
+      <if test="photoids != null">
+        photoIds,
+      </if>
+      <if test="remain != null">
+        remain,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="scale != null">
+        scale,
+      </if>
+      <if test="signingdate != null">
+        signingDate,
+      </if>
+      <if test="starlevel != null">
+        starLevel,
+      </if>
+      <if test="startcollecttime != null">
+        startCollectTime,
+      </if>
+      <if test="sycompanyid != null">
+        syCompanyid,
+      </if>
+      <if test="sycompanyfile != null">
+        syCompanyFile,
+      </if>
+      <if test="trashbinnum != null">
+        trashBinNum,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="wasteoil != null">
+        wasteOil,
+      </if>
+      <if test="classesid != null">
+        classesId,
+      </if>
+      <if test="documenttypeid != null">
+        documentTypeId,
+      </if>
+      <if test="streetid != null">
+        streetId,
+      </if>
+      <if test="logout != null">
+        logout,
+      </if>
+      <if test="logouttime != null">
+        logoutTime,
+      </if>
+      <if test="sourcetime != null">
+        sourceTime,
+      </if>
+      <if test="sourcetype != null">
+        sourceType,
+      </if>
+      <if test="contacttel != null">
+        contactTel,
+      </if>
+      <if test="legalmanfileids != null">
+        legalManFileIds,
+      </if>
+      <if test="legalmanphone != null">
+        legalManPhone,
+      </if>
+      <if test="legalmantel != null">
+        legalManTel,
+      </if>
+      <if test="sourcemanid != null">
+        sourceManId,
+      </if>
+      <if test="endcollecttime2 != null">
+        endCollectTime2,
+      </if>
+      <if test="files != null">
+        files,
+      </if>
+      <if test="mealtime != null">
+        mealTime,
+      </if>
+      <if test="restaurantaddress != null">
+        restaurantAddress,
+      </if>
+      <if test="startcollecttime2 != null">
+        startCollectTime2,
+      </if>
+      <if test="unitaddress != null">
+        unitAddress,
+      </if>
+      <if test="unitname != null">
+        unitName,
+      </if>
+      <if test="lastcollectcarcode != null">
+        lastCollectCarCode,
+      </if>
+      <if test="lastcollectcarid != null">
+        lastCollectCarId,
+      </if>
+      <if test="mealrangedisplayvalue != null">
+        mealRangeDisplayValue,
+      </if>
+      <if test="mealrangeid != null">
+        mealRangeId,
+      </if>
+      <if test="pinyin != null">
+        pinyin,
+      </if>
+      <if test="contactmobile != null">
+        contactMobile,
+      </if>
+      <if test="signedstatus != null">
+        signedStatus,
+      </if>
+      <if test="elevator != null">
+        elevator,
+      </if>
+      <if test="signingenddate != null">
+        signingEndDate,
+      </if>
+      <if test="stair != null">
+        stair,
+      </if>
+      <if test="syenddate != null">
+        syEndDate,
+      </if>
+      <if test="systartdate != null">
+        syStartDate,
+      </if>
+      <if test="floornum != null">
+        floorNum,
+      </if>
+      <if test="sycompanyname != null">
+        syCompanyName,
+      </if>
+      <if test="applytrashbinnum != null">
+        applyTrashBinNum,
+      </if>
+      <if test="datasource != null">
+        dataSource,
+      </if>
+      <if test="paperfileids != null">
+        paperFileIds,
+      </if>
+      <if test="paperfilenames != null">
+        paperFileNames,
+      </if>
+      <if test="creditassessrecord != null">
+        creditAssessRecord,
+      </if>
+      <if test="areaId != null">
+        areaId,
+      </if>
+      <if test="areaName != null">
+        areaName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="businessarea != null">
+        #{businessarea,jdbcType=REAL},
+      </if>
+      <if test="closedate != null">
+        #{closedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="collectfrequency != null">
+        #{collectfrequency,jdbcType=REAL},
+      </if>
+      <if test="complaintshotline != null">
+        #{complaintshotline,jdbcType=VARCHAR},
+      </if>
+      <if test="contactperson != null">
+        #{contactperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactphone != null">
+        #{contactphone,jdbcType=VARCHAR},
+      </if>
+      <if test="contractlength != null">
+        #{contractlength,jdbcType=REAL},
+      </if>
+      <if test="contractno != null">
+        #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyoutput != null">
+        #{dailyoutput,jdbcType=REAL},
+      </if>
+      <if test="dailyoutputwasteoil != null">
+        #{dailyoutputwasteoil,jdbcType=REAL},
+      </if>
+      <if test="documentno != null">
+        #{documentno,jdbcType=VARCHAR},
+      </if>
+      <if test="endcollecttime != null">
+        #{endcollecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hygieniclicensedate != null">
+        #{hygieniclicensedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iscollectscdoil != null">
+        #{iscollectscdoil,jdbcType=INTEGER},
+      </if>
+      <if test="lastcollectdatetime != null">
+        #{lastcollectdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitudedone != null">
+        #{latitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="legalrepresentative != null">
+        #{legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitudedone != null">
+        #{longitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="mealrange != null">
+        #{mealrange,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="opendate != null">
+        #{opendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderindex != null">
+        #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="permit != null">
+        #{permit,jdbcType=INTEGER},
+      </if>
+      <if test="permitno != null">
+        #{permitno,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null">
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="photofile != null">
+        #{photofile,jdbcType=VARCHAR},
+      </if>
+      <if test="photoids != null">
+        #{photoids,jdbcType=VARCHAR},
+      </if>
+      <if test="remain != null">
+        #{remain,jdbcType=REAL},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="signingdate != null">
+        #{signingdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starlevel != null">
+        #{starlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="startcollecttime != null">
+        #{startcollecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sycompanyid != null">
+        #{sycompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="sycompanyfile != null">
+        #{sycompanyfile,jdbcType=VARCHAR},
+      </if>
+      <if test="trashbinnum != null">
+        #{trashbinnum,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="wasteoil != null">
+        #{wasteoil,jdbcType=REAL},
+      </if>
+      <if test="classesid != null">
+        #{classesid,jdbcType=VARCHAR},
+      </if>
+      <if test="documenttypeid != null">
+        #{documenttypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetid != null">
+        #{streetid,jdbcType=VARCHAR},
+      </if>
+      <if test="logout != null">
+        #{logout,jdbcType=INTEGER},
+      </if>
+      <if test="logouttime != null">
+        #{logouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourcetime != null">
+        #{sourcetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourcetype != null">
+        #{sourcetype,jdbcType=INTEGER},
+      </if>
+      <if test="contacttel != null">
+        #{contacttel,jdbcType=VARCHAR},
+      </if>
+      <if test="legalmanfileids != null">
+        #{legalmanfileids,jdbcType=VARCHAR},
+      </if>
+      <if test="legalmanphone != null">
+        #{legalmanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="legalmantel != null">
+        #{legalmantel,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcemanid != null">
+        #{sourcemanid,jdbcType=VARCHAR},
+      </if>
+      <if test="endcollecttime2 != null">
+        #{endcollecttime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="files != null">
+        #{files,jdbcType=VARCHAR},
+      </if>
+      <if test="mealtime != null">
+        #{mealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restaurantaddress != null">
+        #{restaurantaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="startcollecttime2 != null">
+        #{startcollecttime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitaddress != null">
+        #{unitaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null">
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcollectcarcode != null">
+        #{lastcollectcarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcollectcarid != null">
+        #{lastcollectcarid,jdbcType=VARCHAR},
+      </if>
+      <if test="mealrangedisplayvalue != null">
+        #{mealrangedisplayvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="mealrangeid != null">
+        #{mealrangeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null">
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="contactmobile != null">
+        #{contactmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="signedstatus != null">
+        #{signedstatus,jdbcType=INTEGER},
+      </if>
+      <if test="elevator != null">
+        #{elevator,jdbcType=INTEGER},
+      </if>
+      <if test="signingenddate != null">
+        #{signingenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stair != null">
+        #{stair,jdbcType=INTEGER},
+      </if>
+      <if test="syenddate != null">
+        #{syenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systartdate != null">
+        #{systartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="floornum != null">
+        #{floornum,jdbcType=INTEGER},
+      </if>
+      <if test="sycompanyname != null">
+        #{sycompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applytrashbinnum != null">
+        #{applytrashbinnum,jdbcType=INTEGER},
+      </if>
+      <if test="datasource != null">
+        #{datasource,jdbcType=INTEGER},
+      </if>
+      <if test="paperfileids != null">
+        #{paperfileids,jdbcType=VARCHAR},
+      </if>
+      <if test="paperfilenames != null">
+        #{paperfilenames,jdbcType=VARCHAR},
+      </if>
+      <if test="creditassessrecord != null">
+        #{creditassessrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.RestaurantInfo">
+    update restaurant_info
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="businessarea != null">
+        businessArea = #{businessarea,jdbcType=REAL},
+      </if>
+      <if test="closedate != null">
+        closeDate = #{closedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="collectfrequency != null">
+        collectFrequency = #{collectfrequency,jdbcType=REAL},
+      </if>
+      <if test="complaintshotline != null">
+        complaintsHotline = #{complaintshotline,jdbcType=VARCHAR},
+      </if>
+      <if test="contactperson != null">
+        contactPerson = #{contactperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactphone != null">
+        contactPhone = #{contactphone,jdbcType=VARCHAR},
+      </if>
+      <if test="contractlength != null">
+        contractLength = #{contractlength,jdbcType=REAL},
+      </if>
+      <if test="contractno != null">
+        contractNo = #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyoutput != null">
+        dailyOutput = #{dailyoutput,jdbcType=REAL},
+      </if>
+      <if test="dailyoutputwasteoil != null">
+        dailyOutPutWasteOil = #{dailyoutputwasteoil,jdbcType=REAL},
+      </if>
+      <if test="documentno != null">
+        documentNo = #{documentno,jdbcType=VARCHAR},
+      </if>
+      <if test="endcollecttime != null">
+        endCollectTime = #{endcollecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hygieniclicensedate != null">
+        hygienicLicenseDate = #{hygieniclicensedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iscollectscdoil != null">
+        isCollectScdOil = #{iscollectscdoil,jdbcType=INTEGER},
+      </if>
+      <if test="lastcollectdatetime != null">
+        lastCollectDateTime = #{lastcollectdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitudedone != null">
+        latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="legalrepresentative != null">
+        legalRepresentative = #{legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitudedone != null">
+        longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="mealrange != null">
+        mealRange = #{mealrange,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="opendate != null">
+        openDate = #{opendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderindex != null">
+        orderIndex = #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="permit != null">
+        permit = #{permit,jdbcType=INTEGER},
+      </if>
+      <if test="permitno != null">
+        permitNo = #{permitno,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null">
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="photofile != null">
+        photoFile = #{photofile,jdbcType=VARCHAR},
+      </if>
+      <if test="photoids != null">
+        photoIds = #{photoids,jdbcType=VARCHAR},
+      </if>
+      <if test="remain != null">
+        remain = #{remain,jdbcType=REAL},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        scale = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="signingdate != null">
+        signingDate = #{signingdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starlevel != null">
+        starLevel = #{starlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="startcollecttime != null">
+        startCollectTime = #{startcollecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sycompanyid != null">
+        syCompanyid = #{sycompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="sycompanyfile != null">
+        syCompanyFile = #{sycompanyfile,jdbcType=VARCHAR},
+      </if>
+      <if test="trashbinnum != null">
+        trashBinNum = #{trashbinnum,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="wasteoil != null">
+        wasteOil = #{wasteoil,jdbcType=REAL},
+      </if>
+      <if test="classesid != null">
+        classesId = #{classesid,jdbcType=VARCHAR},
+      </if>
+      <if test="documenttypeid != null">
+        documentTypeId = #{documenttypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetid != null">
+        streetId = #{streetid,jdbcType=VARCHAR},
+      </if>
+      <if test="logout != null">
+        logout = #{logout,jdbcType=INTEGER},
+      </if>
+      <if test="logouttime != null">
+        logoutTime = #{logouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourcetime != null">
+        sourceTime = #{sourcetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourcetype != null">
+        sourceType = #{sourcetype,jdbcType=INTEGER},
+      </if>
+      <if test="contacttel != null">
+        contactTel = #{contacttel,jdbcType=VARCHAR},
+      </if>
+      <if test="legalmanfileids != null">
+        legalManFileIds = #{legalmanfileids,jdbcType=VARCHAR},
+      </if>
+      <if test="legalmanphone != null">
+        legalManPhone = #{legalmanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="legalmantel != null">
+        legalManTel = #{legalmantel,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcemanid != null">
+        sourceManId = #{sourcemanid,jdbcType=VARCHAR},
+      </if>
+      <if test="endcollecttime2 != null">
+        endCollectTime2 = #{endcollecttime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="files != null">
+        files = #{files,jdbcType=VARCHAR},
+      </if>
+      <if test="mealtime != null">
+        mealTime = #{mealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restaurantaddress != null">
+        restaurantAddress = #{restaurantaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="startcollecttime2 != null">
+        startCollectTime2 = #{startcollecttime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitaddress != null">
+        unitAddress = #{unitaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null">
+        unitName = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcollectcarcode != null">
+        lastCollectCarCode = #{lastcollectcarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcollectcarid != null">
+        lastCollectCarId = #{lastcollectcarid,jdbcType=VARCHAR},
+      </if>
+      <if test="mealrangedisplayvalue != null">
+        mealRangeDisplayValue = #{mealrangedisplayvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="mealrangeid != null">
+        mealRangeId = #{mealrangeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null">
+        pinyin = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="contactmobile != null">
+        contactMobile = #{contactmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="signedstatus != null">
+        signedStatus = #{signedstatus,jdbcType=INTEGER},
+      </if>
+      <if test="elevator != null">
+        elevator = #{elevator,jdbcType=INTEGER},
+      </if>
+      <if test="signingenddate != null">
+        signingEndDate = #{signingenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stair != null">
+        stair = #{stair,jdbcType=INTEGER},
+      </if>
+      <if test="syenddate != null">
+        syEndDate = #{syenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systartdate != null">
+        syStartDate = #{systartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="floornum != null">
+        floorNum = #{floornum,jdbcType=INTEGER},
+      </if>
+      <if test="sycompanyname != null">
+        syCompanyName = #{sycompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applytrashbinnum != null">
+        applyTrashBinNum = #{applytrashbinnum,jdbcType=INTEGER},
+      </if>
+      <if test="datasource != null">
+        dataSource = #{datasource,jdbcType=INTEGER},
+      </if>
+      <if test="paperfileids != null">
+        paperFileIds = #{paperfileids,jdbcType=VARCHAR},
+      </if>
+      <if test="paperfilenames != null">
+        paperFileNames = #{paperfilenames,jdbcType=VARCHAR},
+      </if>
+      <if test="creditassessrecord != null">
+        creditAssessRecord = #{creditassessrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        areaId = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        areaName = #{areaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.RestaurantInfo">
+    update restaurant_info
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      address = #{address,jdbcType=VARCHAR},
+      businessArea = #{businessarea,jdbcType=REAL},
+      closeDate = #{closedate,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      collectFrequency = #{collectfrequency,jdbcType=REAL},
+      complaintsHotline = #{complaintshotline,jdbcType=VARCHAR},
+      contactPerson = #{contactperson,jdbcType=VARCHAR},
+      contactPhone = #{contactphone,jdbcType=VARCHAR},
+      contractLength = #{contractlength,jdbcType=REAL},
+      contractNo = #{contractno,jdbcType=VARCHAR},
+      dailyOutput = #{dailyoutput,jdbcType=REAL},
+      dailyOutPutWasteOil = #{dailyoutputwasteoil,jdbcType=REAL},
+      documentNo = #{documentno,jdbcType=VARCHAR},
+      endCollectTime = #{endcollecttime,jdbcType=TIMESTAMP},
+      hygienicLicenseDate = #{hygieniclicensedate,jdbcType=TIMESTAMP},
+      isCollectScdOil = #{iscollectscdoil,jdbcType=INTEGER},
+      lastCollectDateTime = #{lastcollectdatetime,jdbcType=TIMESTAMP},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      legalRepresentative = #{legalrepresentative,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      mealRange = #{mealrange,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      openDate = #{opendate,jdbcType=TIMESTAMP},
+      orderIndex = #{orderindex,jdbcType=INTEGER},
+      permit = #{permit,jdbcType=INTEGER},
+      permitNo = #{permitno,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      photoFile = #{photofile,jdbcType=VARCHAR},
+      photoIds = #{photoids,jdbcType=VARCHAR},
+      remain = #{remain,jdbcType=REAL},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      signingDate = #{signingdate,jdbcType=TIMESTAMP},
+      starLevel = #{starlevel,jdbcType=VARCHAR},
+      startCollectTime = #{startcollecttime,jdbcType=TIMESTAMP},
+      syCompanyid = #{sycompanyid,jdbcType=VARCHAR},
+      syCompanyFile = #{sycompanyfile,jdbcType=VARCHAR},
+      trashBinNum = #{trashbinnum,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      wasteOil = #{wasteoil,jdbcType=REAL},
+      classesId = #{classesid,jdbcType=VARCHAR},
+      documentTypeId = #{documenttypeid,jdbcType=VARCHAR},
+      streetId = #{streetid,jdbcType=VARCHAR},
+      logout = #{logout,jdbcType=INTEGER},
+      logoutTime = #{logouttime,jdbcType=TIMESTAMP},
+      sourceTime = #{sourcetime,jdbcType=TIMESTAMP},
+      sourceType = #{sourcetype,jdbcType=INTEGER},
+      contactTel = #{contacttel,jdbcType=VARCHAR},
+      legalManFileIds = #{legalmanfileids,jdbcType=VARCHAR},
+      legalManPhone = #{legalmanphone,jdbcType=VARCHAR},
+      legalManTel = #{legalmantel,jdbcType=VARCHAR},
+      sourceManId = #{sourcemanid,jdbcType=VARCHAR},
+      endCollectTime2 = #{endcollecttime2,jdbcType=TIMESTAMP},
+      files = #{files,jdbcType=VARCHAR},
+      mealTime = #{mealtime,jdbcType=TIMESTAMP},
+      restaurantAddress = #{restaurantaddress,jdbcType=VARCHAR},
+      startCollectTime2 = #{startcollecttime2,jdbcType=TIMESTAMP},
+      unitAddress = #{unitaddress,jdbcType=VARCHAR},
+      unitName = #{unitname,jdbcType=VARCHAR},
+      lastCollectCarCode = #{lastcollectcarcode,jdbcType=VARCHAR},
+      lastCollectCarId = #{lastcollectcarid,jdbcType=VARCHAR},
+      mealRangeDisplayValue = #{mealrangedisplayvalue,jdbcType=VARCHAR},
+      mealRangeId = #{mealrangeid,jdbcType=VARCHAR},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      contactMobile = #{contactmobile,jdbcType=VARCHAR},
+      signedStatus = #{signedstatus,jdbcType=INTEGER},
+      elevator = #{elevator,jdbcType=INTEGER},
+      signingEndDate = #{signingenddate,jdbcType=TIMESTAMP},
+      stair = #{stair,jdbcType=INTEGER},
+      syEndDate = #{syenddate,jdbcType=TIMESTAMP},
+      syStartDate = #{systartdate,jdbcType=TIMESTAMP},
+      floorNum = #{floornum,jdbcType=INTEGER},
+      syCompanyName = #{sycompanyname,jdbcType=VARCHAR},
+      applyTrashBinNum = #{applytrashbinnum,jdbcType=INTEGER},
+      dataSource = #{datasource,jdbcType=INTEGER},
+      paperFileIds = #{paperfileids,jdbcType=VARCHAR},
+      paperFileNames = #{paperfilenames,jdbcType=VARCHAR},
+      creditAssessRecord = #{creditassessrecord,jdbcType=VARCHAR},
+      areaId = #{areaId,jdbcType=VARCHAR},
+      areaName = #{areaName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <select id="getById" parameterType="Map" resultType="Map">
+		select 
+	<include refid="Base_Column_List" />
+		from restaurant_info
+		where id = '${id}'
+	</select>
+	
+	<select id="listAllRestInfo" resultMap="BaseResultMap"  parameterType="Map">
+		select * from restaurant_info  where 1=1 and beenDeleted=0
+		<if test="key !=null and key!=''">
+			and name like '%${key}%'
+		</if>
+	</select>
+	
+	<select id="selectByPage" parameterType="Map" resultType="Map">
+		select * from restaurant_info  where 1=1	and beenDeleted=0
+		
+		<if test="key !=null and key!=''">
+			and name like '%${key}%' 
+		</if>
+		<if test="sort !=null and sort!='' ">
+			Order by ${sort} ${dir}
+		</if>
+		
+		LIMIT ${pageNow},${pageSize}
+	</select>
+	
+	<select id="selectById">
+			select count(*) from restaurant_info where id=#{0}
+	</select>
+    <select id="selectById" resultType="java.lang.Integer">
+  		select count(*) from restaurant_info where id=#{0}
+    </select>
+</mapper>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.CarWeighMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.CarWeigh">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="carCode" jdbcType="VARCHAR" property="carcode" />
+    <result column="carId" jdbcType="VARCHAR" property="carid" />
+    <result column="carPhotoCaptureTime" jdbcType="TIMESTAMP" property="carphotocapturetime" />
+    <result column="carPhotoRealTimeId" jdbcType="VARCHAR" property="carphotorealtimeid" />
+    <result column="carWeighId" jdbcType="VARCHAR" property="carweighid" />
+    <result column="matchStatus" jdbcType="VARCHAR" property="matchstatus" />
+    <result column="netWeigh" jdbcType="REAL" property="netweigh" />
+    <result column="recordStatus" jdbcType="VARCHAR" property="recordstatus" />
+    <result column="restaurantId" jdbcType="VARCHAR" property="restaurantid" />
+    <result column="restaurantName" jdbcType="VARCHAR" property="restaurantname" />
+    <result column="rfidCode" jdbcType="VARCHAR" property="rfidcode" />
+    <result column="rfidCreateTime" jdbcType="TIMESTAMP" property="rfidcreatetime" />
+    <result column="rfidRecordRealTimeId" jdbcType="VARCHAR" property="rfidrecordrealtimeid" />
+    <result column="weighTime" jdbcType="TIMESTAMP" property="weightime" />
+    <result column="gpsCarPositionId" jdbcType="VARCHAR" property="gpscarpositionid" />
+    <result column="gpsLatitude" jdbcType="DOUBLE" property="gpslatitude" />
+    <result column="gpsLongitude" jdbcType="DOUBLE" property="gpslongitude" />
+    <result column="latitudeDone" jdbcType="DOUBLE" property="latitudedone" />
+    <result column="longitudeDone" jdbcType="DOUBLE" property="longitudedone" />
+    <result column="devCode" jdbcType="VARCHAR" property="devcode" />
+    <result column="grossWeight" jdbcType="DOUBLE" property="grossweight" />
+    <result column="tareWeight" jdbcType="DOUBLE" property="tareweight" />
+    <result column="carMileage" jdbcType="DOUBLE" property="carmileage" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.movingcq.entity.CarWeigh">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, carCode, carId, 
+    carPhotoCaptureTime, carPhotoRealTimeId, carWeighId, matchStatus, netWeigh, recordStatus, 
+    restaurantId, restaurantName, rfidCode, rfidCreateTime, rfidRecordRealTimeId, weighTime, 
+    gpsCarPositionId, gpsLatitude, gpsLongitude, latitudeDone, longitudeDone, devCode, 
+    grossWeight, tareWeight, carMileage
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_weigh
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from car_weigh
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.CarWeigh">
+    insert into car_weigh (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      carCode, carId, carPhotoCaptureTime, 
+      carPhotoRealTimeId, carWeighId, matchStatus, 
+      netWeigh, recordStatus, restaurantId, 
+      restaurantName, rfidCode, rfidCreateTime, 
+      rfidRecordRealTimeId, weighTime, gpsCarPositionId, 
+      gpsLatitude, gpsLongitude, latitudeDone, 
+      longitudeDone, devCode, grossWeight, 
+      tareWeight, carMileage, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{carcode,jdbcType=VARCHAR}, #{carid,jdbcType=VARCHAR}, #{carphotocapturetime,jdbcType=TIMESTAMP}, 
+      #{carphotorealtimeid,jdbcType=VARCHAR}, #{carweighid,jdbcType=VARCHAR}, #{matchstatus,jdbcType=VARCHAR}, 
+      #{netweigh,jdbcType=REAL}, #{recordstatus,jdbcType=VARCHAR}, #{restaurantid,jdbcType=VARCHAR}, 
+      #{restaurantname,jdbcType=VARCHAR}, #{rfidcode,jdbcType=VARCHAR}, #{rfidcreatetime,jdbcType=TIMESTAMP}, 
+      #{rfidrecordrealtimeid,jdbcType=VARCHAR}, #{weightime,jdbcType=TIMESTAMP}, #{gpscarpositionid,jdbcType=VARCHAR}, 
+      #{gpslatitude,jdbcType=DOUBLE}, #{gpslongitude,jdbcType=DOUBLE}, #{latitudedone,jdbcType=DOUBLE}, 
+      #{longitudedone,jdbcType=DOUBLE}, #{devcode,jdbcType=VARCHAR}, #{grossweight,jdbcType=DOUBLE}, 
+      #{tareweight,jdbcType=DOUBLE}, #{carmileage,jdbcType=DOUBLE}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.CarWeigh">
+    insert into car_weigh
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="carcode != null">
+        carCode,
+      </if>
+      <if test="carid != null">
+        carId,
+      </if>
+      <if test="carphotocapturetime != null">
+        carPhotoCaptureTime,
+      </if>
+      <if test="carphotorealtimeid != null">
+        carPhotoRealTimeId,
+      </if>
+      <if test="carweighid != null">
+        carWeighId,
+      </if>
+      <if test="matchstatus != null">
+        matchStatus,
+      </if>
+      <if test="netweigh != null">
+        netWeigh,
+      </if>
+      <if test="recordstatus != null">
+        recordStatus,
+      </if>
+      <if test="restaurantid != null">
+        restaurantId,
+      </if>
+      <if test="restaurantname != null">
+        restaurantName,
+      </if>
+      <if test="rfidcode != null">
+        rfidCode,
+      </if>
+      <if test="rfidcreatetime != null">
+        rfidCreateTime,
+      </if>
+      <if test="rfidrecordrealtimeid != null">
+        rfidRecordRealTimeId,
+      </if>
+      <if test="weightime != null">
+        weighTime,
+      </if>
+      <if test="gpscarpositionid != null">
+        gpsCarPositionId,
+      </if>
+      <if test="gpslatitude != null">
+        gpsLatitude,
+      </if>
+      <if test="gpslongitude != null">
+        gpsLongitude,
+      </if>
+      <if test="latitudedone != null">
+        latitudeDone,
+      </if>
+      <if test="longitudedone != null">
+        longitudeDone,
+      </if>
+      <if test="devcode != null">
+        devCode,
+      </if>
+      <if test="grossweight != null">
+        grossWeight,
+      </if>
+      <if test="tareweight != null">
+        tareWeight,
+      </if>
+      <if test="carmileage != null">
+        carMileage,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carcode != null">
+        #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        #{carid,jdbcType=VARCHAR},
+      </if>
+      <if test="carphotocapturetime != null">
+        #{carphotocapturetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carphotorealtimeid != null">
+        #{carphotorealtimeid,jdbcType=VARCHAR},
+      </if>
+      <if test="carweighid != null">
+        #{carweighid,jdbcType=VARCHAR},
+      </if>
+      <if test="matchstatus != null">
+        #{matchstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="netweigh != null">
+        #{netweigh,jdbcType=REAL},
+      </if>
+      <if test="recordstatus != null">
+        #{recordstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantid != null">
+        #{restaurantid,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantname != null">
+        #{restaurantname,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidcode != null">
+        #{rfidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidcreatetime != null">
+        #{rfidcreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rfidrecordrealtimeid != null">
+        #{rfidrecordrealtimeid,jdbcType=VARCHAR},
+      </if>
+      <if test="weightime != null">
+        #{weightime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gpscarpositionid != null">
+        #{gpscarpositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="gpslatitude != null">
+        #{gpslatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpslongitude != null">
+        #{gpslongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitudedone != null">
+        #{latitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="longitudedone != null">
+        #{longitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="devcode != null">
+        #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="grossweight != null">
+        #{grossweight,jdbcType=DOUBLE},
+      </if>
+      <if test="tareweight != null">
+        #{tareweight,jdbcType=DOUBLE},
+      </if>
+      <if test="carmileage != null">
+        #{carmileage,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.CarWeigh">
+    update car_weigh
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carcode != null">
+        carCode = #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        carId = #{carid,jdbcType=VARCHAR},
+      </if>
+      <if test="carphotocapturetime != null">
+        carPhotoCaptureTime = #{carphotocapturetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carphotorealtimeid != null">
+        carPhotoRealTimeId = #{carphotorealtimeid,jdbcType=VARCHAR},
+      </if>
+      <if test="carweighid != null">
+        carWeighId = #{carweighid,jdbcType=VARCHAR},
+      </if>
+      <if test="matchstatus != null">
+        matchStatus = #{matchstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="netweigh != null">
+        netWeigh = #{netweigh,jdbcType=REAL},
+      </if>
+      <if test="recordstatus != null">
+        recordStatus = #{recordstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantid != null">
+        restaurantId = #{restaurantid,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantname != null">
+        restaurantName = #{restaurantname,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidcode != null">
+        rfidCode = #{rfidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidcreatetime != null">
+        rfidCreateTime = #{rfidcreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rfidrecordrealtimeid != null">
+        rfidRecordRealTimeId = #{rfidrecordrealtimeid,jdbcType=VARCHAR},
+      </if>
+      <if test="weightime != null">
+        weighTime = #{weightime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gpscarpositionid != null">
+        gpsCarPositionId = #{gpscarpositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="gpslatitude != null">
+        gpsLatitude = #{gpslatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpslongitude != null">
+        gpsLongitude = #{gpslongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitudedone != null">
+        latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="longitudedone != null">
+        longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      </if>
+      <if test="devcode != null">
+        devCode = #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="grossweight != null">
+        grossWeight = #{grossweight,jdbcType=DOUBLE},
+      </if>
+      <if test="tareweight != null">
+        tareWeight = #{tareweight,jdbcType=DOUBLE},
+      </if>
+      <if test="carmileage != null">
+        carMileage = #{carmileage,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.movingcq.entity.CarWeigh">
+    update car_weigh
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      carCode = #{carcode,jdbcType=VARCHAR},
+      carId = #{carid,jdbcType=VARCHAR},
+      carPhotoCaptureTime = #{carphotocapturetime,jdbcType=TIMESTAMP},
+      carPhotoRealTimeId = #{carphotorealtimeid,jdbcType=VARCHAR},
+      carWeighId = #{carweighid,jdbcType=VARCHAR},
+      matchStatus = #{matchstatus,jdbcType=VARCHAR},
+      netWeigh = #{netweigh,jdbcType=REAL},
+      recordStatus = #{recordstatus,jdbcType=VARCHAR},
+      restaurantId = #{restaurantid,jdbcType=VARCHAR},
+      restaurantName = #{restaurantname,jdbcType=VARCHAR},
+      rfidCode = #{rfidcode,jdbcType=VARCHAR},
+      rfidCreateTime = #{rfidcreatetime,jdbcType=TIMESTAMP},
+      rfidRecordRealTimeId = #{rfidrecordrealtimeid,jdbcType=VARCHAR},
+      weighTime = #{weightime,jdbcType=TIMESTAMP},
+      gpsCarPositionId = #{gpscarpositionid,jdbcType=VARCHAR},
+      gpsLatitude = #{gpslatitude,jdbcType=DOUBLE},
+      gpsLongitude = #{gpslongitude,jdbcType=DOUBLE},
+      latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      devCode = #{devcode,jdbcType=VARCHAR},
+      grossWeight = #{grossweight,jdbcType=DOUBLE},
+      tareWeight = #{tareweight,jdbcType=DOUBLE},
+      carMileage = #{carmileage,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.CarWeigh">
+    update car_weigh
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      carCode = #{carcode,jdbcType=VARCHAR},
+      carId = #{carid,jdbcType=VARCHAR},
+      carPhotoCaptureTime = #{carphotocapturetime,jdbcType=TIMESTAMP},
+      carPhotoRealTimeId = #{carphotorealtimeid,jdbcType=VARCHAR},
+      carWeighId = #{carweighid,jdbcType=VARCHAR},
+      matchStatus = #{matchstatus,jdbcType=VARCHAR},
+      netWeigh = #{netweigh,jdbcType=REAL},
+      recordStatus = #{recordstatus,jdbcType=VARCHAR},
+      restaurantId = #{restaurantid,jdbcType=VARCHAR},
+      restaurantName = #{restaurantname,jdbcType=VARCHAR},
+      rfidCode = #{rfidcode,jdbcType=VARCHAR},
+      rfidCreateTime = #{rfidcreatetime,jdbcType=TIMESTAMP},
+      rfidRecordRealTimeId = #{rfidrecordrealtimeid,jdbcType=VARCHAR},
+      weighTime = #{weightime,jdbcType=TIMESTAMP},
+      gpsCarPositionId = #{gpscarpositionid,jdbcType=VARCHAR},
+      gpsLatitude = #{gpslatitude,jdbcType=DOUBLE},
+      gpsLongitude = #{gpslongitude,jdbcType=DOUBLE},
+      latitudeDone = #{latitudedone,jdbcType=DOUBLE},
+      longitudeDone = #{longitudedone,jdbcType=DOUBLE},
+      devCode = #{devcode,jdbcType=VARCHAR},
+      grossWeight = #{grossweight,jdbcType=DOUBLE},
+      tareWeight = #{tareweight,jdbcType=DOUBLE},
+      carMileage = #{carmileage,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

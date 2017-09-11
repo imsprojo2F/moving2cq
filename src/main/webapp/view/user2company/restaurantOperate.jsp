@@ -270,7 +270,7 @@ $(document).ready(function() {
     	"processing": true,
         "serverSide": true,
         "ajax":{
-        	url:"restInfo/listAll",
+        	url:"restInfo/listAllRest",
             type:"POST"
         },
         "deferRender": true, //延迟加载数据

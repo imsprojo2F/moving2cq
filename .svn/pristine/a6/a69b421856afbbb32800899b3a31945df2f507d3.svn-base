@@ -1,0 +1,28 @@
+package com.movingcq.service;
+
+import java.util.List;
+
+import com.movingcq.entity.Bucket2RfidInfo;
+import com.movingcq.entity.BucketInfo;
+import com.movingcq.entity.QueryParameters;
+
+public interface IBucketInfoService {
+
+	public int addBucketInfo(BucketInfo bucketInfo);
+
+	public int deleteById(String[] ids);
+
+	public int deleteByRfids(String[] ids);
+
+	public int updateById(BucketInfo bucketInfo);
+
+	public int updateByRfid(String id, String ids);
+
+	public List<Bucket2RfidInfo> listAllBucketInfo(QueryParameters qParameters);
+
+	public List<Bucket2RfidInfo> getAllBucketInfo();
+
+	public List<Bucket2RfidInfo> selectByPage(QueryParameters qParameters);
+
+	BucketInfo selectByAcc(String bucket_code);
+}

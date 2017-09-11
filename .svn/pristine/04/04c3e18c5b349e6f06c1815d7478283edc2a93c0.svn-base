@@ -1,0 +1,39 @@
+package com.movingcq.dao;
+
+import java.util.List;
+
+import com.movingcq.entity.QueryParameters;
+import com.movingcq.entity.RfidInfo;
+
+public interface RfidInfoMapper {
+
+	List<RfidInfo> listAllRfid(QueryParameters qParameters);
+
+	List<RfidInfo> listRfid();
+
+	List<RfidInfo> selectByPage(QueryParameters qParameters);
+
+	RfidInfo selectByAcc(String rfid);
+
+	/**
+	 * @param sysBucket
+	 * @return
+	 */
+	int insert(RfidInfo rfidInfo);
+
+	/**
+	 * @param ids
+	 * @return
+	 */
+	int deleteById(String[] ids);
+
+	/**
+	 * @param RfidInfo
+	 * @return
+	 */
+	int updateById(RfidInfo rfidInfo);
+
+	int updateByIds(String[] ids);
+
+	int updateByRfid(int isUse, String rfid);
+}

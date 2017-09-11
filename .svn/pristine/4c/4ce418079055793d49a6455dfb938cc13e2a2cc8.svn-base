@@ -1,0 +1,17 @@
+package com.movingcq.dao;
+
+import com.movingcq.entity.CarInfo;
+
+public interface CarInfoMapper {
+    int deleteByPrimaryKey(String id);
+
+    int insert(CarInfo record);
+
+    int insertSelective(CarInfo record);
+
+    CarInfo selectByPrimaryKey(String id);
+
+    int updateByPrimaryKeySelective(CarInfo record);
+
+    int updateByPrimaryKey(CarInfo record);
+}

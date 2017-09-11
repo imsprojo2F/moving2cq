@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.MapBasicInfoMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.MapBasicInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="restaurant_uid" jdbcType="VARCHAR" property="restaurantUid" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="select_type" jdbcType="INTEGER" property="selectType" />
+    <result column="order_num" jdbcType="INTEGER" property="order_num" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, restaurant_uid, car_id, type, longitude, latitude, select_type, order_num, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from map_basic_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getStartPoint" resultType="java.util.Map"  parameterType="java.util.Map">
+    select m.* from map_basic_info m where order_num=0
+  </select>
+  <select id="selectByKey" resultType="java.util.Map"  parameterType="java.util.Map">
+    select r.*,m.* from restaurant_info r,map_basic_info m
+    where m.restaurant_uid = r.code 
+	and car_id=${car_id} order by m.order_num asc
+  </select>
+  <select id="getCarId" resultType="java.util.Map"  parameterType="java.util.Map">
+    select distinct(car_id) from map_basic_info 
+  </select>
+  <select id="selectByIds" resultType="java.util.Map" parameterType="java.lang.String">
+		<![CDATA[SELECT * from vehicle_info where id not in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+  </select>
+  
+  <select id="selectByCarIds" resultType="java.util.Map" parameterType="java.lang.String">
+		<![CDATA[SELECT * from vehicle_info where id in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from map_basic_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCodes" parameterType="java.lang.String">
+		<![CDATA[DELETE from map_basic_info where restaurant_uid in
+		]]>
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.MapBasicInfo">
+    insert into map_basic_info (restaurant_uid, car_id, 
+      type, longitude, latitude, 
+      select_type, order_num, create_time, 
+      update_time)
+    values ( #{restaurantUid,jdbcType=VARCHAR}, #{carId,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, 
+      #{selectType,jdbcType=INTEGER}, #{order_num,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.MapBasicInfo">
+    insert into map_basic_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="restaurantUid != null">
+        restaurant_uid,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="selectType != null">
+        select_type,
+      </if>
+      <if test="order_num != null">
+        order_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantUid != null">
+        #{restaurantUid,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="selectType != null">
+        #{selectType,jdbcType=INTEGER},
+      </if>
+      <if test="order_num != null">
+        #{order_num,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.MapBasicInfo">
+    update map_basic_info
+    <set>
+      <if test="restaurantUid != null">
+        restaurant_uid = #{restaurantUid,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="selectType != null">
+        select_type = #{selectType,jdbcType=INTEGER},
+      </if>
+      <if test="order_num != null">
+        order_num = #{order_num,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByLng" parameterType="java.util.Map">
+    update map_basic_info
+    <set>
+      <if test="car_id !=null">
+			car_id=${car_id},
+	 </if>
+      
+      <if test="lng != null">
+        order_num = ${order},
+      </if>
+      update_time = NOW(),
+    </set>
+    where longitude = ${lng}
+  </update>
+  <update id="updateStart" parameterType="java.util.Map">
+    update map_basic_info
+    <set>
+      longitude = ${lng},
+      latitude = ${lat},
+      update_time = NOW(),
+    </set>
+    where  car_id=-1 and order_num=0
+  </update>
+  <update id="updateByCarId" parameterType="java.util.Map">
+    update map_basic_info
+    <set>
+		car_id=0,
+        order_num = 0,
+      	update_time = NOW(),
+    </set>
+    where car_id = ${car_id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.MapBasicInfo">
+    update map_basic_info
+    set restaurant_uid = #{restaurantUid,jdbcType=VARCHAR},
+      car_id = #{carId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      select_type = #{selectType,jdbcType=INTEGER},
+      order_num = #{order_num,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

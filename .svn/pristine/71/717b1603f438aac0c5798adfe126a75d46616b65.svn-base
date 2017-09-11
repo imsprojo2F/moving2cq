@@ -1,0 +1,27 @@
+package com.movingcq.service;
+
+import java.util.List;
+
+import com.movingcq.entity.QueryParameters;
+import com.movingcq.entity.RfidInfo;
+
+public interface IRfidInfoService {
+
+	public int insert(RfidInfo rfidInfo);
+
+	public int deleteById(String[] ids);
+
+	public int updateById(RfidInfo rfidInfo);
+
+	public int updateByRfid(int isUse, String rfid);
+
+	public int updateByIds(String[] ids);
+
+	public List<RfidInfo> listAllRfidInfo(QueryParameters qParameters);
+
+	public List<RfidInfo> listAllRfidInfo();
+
+	public List<RfidInfo> selectByPage(QueryParameters qParameters);
+
+	RfidInfo selectByAcc(String rfid);
+}

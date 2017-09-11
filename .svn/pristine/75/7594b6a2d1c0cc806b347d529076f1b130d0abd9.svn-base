@@ -1,0 +1,633 @@
+/**   
+* @Title: QuartzJob.java 
+* @Package com.movingcq.quartz 
+* @Description: TODO(用一句话描述该文件做什么) 
+* @author Imsprojo2FAN
+* @date 2017年4月11日 下午1:33:01 
+* @version V1.0   
+*/
+package com.movingcq.quartz;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.movingcq.entity.CarDevice;
+import com.movingcq.entity.CarInfo;
+import com.movingcq.entity.LoadoMasterRecord;
+import com.movingcq.entity.ParameterRecord;
+import com.movingcq.entity.RestaurantInfo;
+import com.movingcq.entity.RfidInfo;
+import com.movingcq.service.ICarDeviceService;
+import com.movingcq.service.ICarInfoService;
+import com.movingcq.service.ILoadoMeterRecordService;
+import com.movingcq.service.IParameterRecordService;
+import com.movingcq.service.IRestInfoService;
+import com.movingcq.service.IRfidInfoService;
+import com.movingcq.util.HttpClientUtil;
+
+/**
+ * @ClassName: QuartzJob
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author Imsprojo2FAN
+ * @date 2017年4月11日 下午1:33:01
+ * 
+ */
+public class QuartzJob {
+
+	@Autowired
+	private IRfidInfoService rfidService;
+
+	@Autowired
+	private IRestInfoService restInfoService;
+
+	@Autowired
+	private IParameterRecordService parameterRecordService;
+
+	@Autowired
+	private ICarInfoService carInfoService;
+
+	@Autowired
+	private ICarDeviceService carDeviceService;
+
+	@Autowired
+	private ILoadoMeterRecordService loadoMeterRecordService;
+
+	static String geturl;
+	static String query;
+	static long timeStamp;
+	static int j = -1;
+	static int result = 0;
+
+	static RfidInfo rInfo = new RfidInfo();
+	static ParameterRecord pRecord = new ParameterRecord();
+	static RestaurantInfo restInfo = new RestaurantInfo();
+	static CarInfo carInfo = new CarInfo();
+	static CarDevice carDevice = new CarDevice();
+	static LoadoMasterRecord lRecord = new LoadoMasterRecord();
+
+	public void execute() {
+
+		System.out.println("------5分钟轮循任务开始执行------");
+
+		Date date = new Date();
+		timeStamp = date.getTime() - 300000; // 5分钟前毫秒数
+
+		// 获取RFID信息------------
+		// getRFID(0, rfidService);
+
+		// 获取餐饮企业信息------------
+		// getRestInfo(0, restInfoService);
+
+		// 获取参数信息------------
+		// getParameter(0, parameterRecordService);
+
+		// 获取车辆信息------------
+		// getCarInfo(0, carInfoService);
+
+		// 获取车载设备信息------------
+		// getDeviceInfo(0, carDeviceService);
+
+		// 获取地磅称重信息------------
+		// getloadoInfo(0, loadoMeterRecordService);
+
+	}
+
+	public static boolean getRFID(int type, IRfidInfoService rfidService) {
+
+		int count = 0;
+		boolean flag = false;
+		geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/rfidDataInsert";
+		if (type == 0) {
+			query = "parameters={\"time\":" + timeStamp + ",\"pageSize\":" + j + ",\"pageNo\":1}";
+		} else {// 数据库初始化
+			j = -1;
+			query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		}
+		JSONObject rfidJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		if (rfidJson != null && rfidJson.get("succ").toString().equals("true")) {
+
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(rfidJson.get("data").toString());
+			int total = rowsJson.getIntValue("total");
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject rfid = json.getJSONObject(i);
+					rInfo.setId(rfid.get("id").toString());
+					rInfo.setCreatetime(rfid.getLong("createTime"));
+					rInfo.setLastchangetime(rfid.getLong("lastChangeTime"));
+					rInfo.setStatus(rfid.getIntValue("status"));
+					rInfo.setBeendeleted(rfid.getIntValue("beenDeleted"));
+					rInfo.setDeletedtime(rfid.getLong("deletedTime"));
+					rInfo.setCardbindingdate(rfid.get("cardBindingDate").toString());
+					rInfo.setOrderindex(rfid.getInteger("orderIndex"));
+					rInfo.setRemarks(rfid.getString("remarks"));
+					rInfo.setRfidcode(rfid.getString("rfidCode"));
+					rInfo.setRfidstatus(rfid.getString("rfidStatus"));
+					rInfo.setTrashbinmodel(rfid.getString("trashbinModel"));
+					rInfo.setTrashweight(rfid.getString("trashbinWeight"));
+					rInfo.setRestaurantId(rfid.getString("restaurantId"));
+					rInfo.setBeenmark(rfid.getInteger("beenMark"));
+					result = rfidService.insert(rInfo);
+					if (result > 0) {
+						count++;
+						if (count == total) {
+							flag = true;
+						}
+					}
+				}
+
+			}
+
+		}
+		return flag;
+	}
+
+	public static boolean getRestInfo(int type, IRestInfoService restInfoService) {
+
+		int count = 0;
+		boolean flag = false;
+		geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/restDataInsert";
+		if (type == 0) {
+			query = "parameters={\"time\":" + timeStamp + ",\"pageSize\":" + j + ",\"pageNo\":1}";
+		} else {// 数据库初始化
+			j = -1;
+			query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		}
+		JSONObject restJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		if (restJson != null && restJson.get("succ").toString().equals("true")) {
+
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(restJson.get("data").toString());
+			int total = rowsJson.getIntValue("total");
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 首先把字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject restObject = json.getJSONObject(i);
+					restInfo.setId(restObject.getString("id"));
+					restInfo.setCreatetime(restObject.getLong("createTime"));
+					restInfo.setLastchangetime(restObject.getLong("lastChangeTime"));
+					restInfo.setStatus(restObject.getInteger("status"));
+					restInfo.setBeendeleted(restObject.getInteger("beenDeleted"));
+					restInfo.setDeletedtime(restObject.getLong("deletedTime"));
+					restInfo.setAddress(restObject.getString("address"));
+					restInfo.setBusinessarea(restObject.getFloat("businessArea"));
+					restInfo.setClosedate(restObject.getLong("closeDate"));
+					restInfo.setCode(restObject.getString("code"));
+					restInfo.setCollectfrequency(restObject.getFloat("collectFrequency"));
+					restInfo.setComplaintshotline(restObject.getString("complaintsHotline"));
+					restInfo.setContactperson(restObject.getString("contactPerson"));
+					restInfo.setContactphone(restObject.getString("contactPhone"));
+					restInfo.setContractlength(restObject.getFloat("contractLength"));
+					restInfo.setContractno(restObject.getString("contractNo"));
+					restInfo.setDailyoutput(restObject.getFloat("dailyOutput"));
+					restInfo.setDailyoutputwasteoil(restObject.getFloat("dailyOutputWasteOil"));
+					restInfo.setDocumentno(restObject.getString("documentNo"));
+					restInfo.setEndcollecttime(restObject.getLong("endCollectTime"));
+					restInfo.setHygieniclicensedate(restObject.getLong("hygienicLicenseDate"));
+					restInfo.setIscollectscdoil(restObject.getInteger("isCollectScdOil"));
+					restInfo.setLastcollectdatetime(restObject.getLong("lastCollectDateTime"));
+					restInfo.setLatitude(restObject.getDouble("latitude"));
+					restInfo.setLatitudedone(restObject.getDouble("latitudeDone"));
+					restInfo.setLegalrepresentative(restObject.getString("legalRepresentative"));
+					restInfo.setLongitude(restObject.getDouble("longitude"));
+					restInfo.setLongitudedone(restObject.getDouble("longitudeDone"));
+					restInfo.setMealrange(restObject.getString("mealRange"));
+					restInfo.setName(restObject.getString("name"));
+					restInfo.setOpendate(restObject.getLong("openDate"));
+					restInfo.setOrderindex(restObject.getInteger("orderIndex"));
+					restInfo.setPermit(restObject.getInteger("permit"));
+					restInfo.setPermitno(restObject.getString("permitNo"));
+					restInfo.setPhonenumber(restObject.getString("phoneNumber"));
+					restInfo.setPhotofile(restObject.getString("photoFile"));
+					restInfo.setPhotoids(restObject.getString("photoIds"));
+					restInfo.setRemain(restObject.getFloat("remain"));
+					restInfo.setRemarks(restObject.getString("remarks"));
+					restInfo.setScale(restObject.getString("scale"));
+					restInfo.setSigningdate(restObject.getLong("signingDate"));
+					restInfo.setStarlevel(restObject.getString("starLevel"));
+					restInfo.setStartcollecttime(restObject.getLong("startCollectTime"));
+					restInfo.setSycompanyfile(restObject.getString("syCompanyFile"));
+					restInfo.setSycompanyid(restObject.getString("syCompanyId"));
+					restInfo.setTrashbinnum(restObject.getInteger("trashbinNum"));
+					restInfo.setType(restObject.getString("type"));
+					restInfo.setWasteoil(restObject.getFloat("wasteOil"));
+					restInfo.setClassesid(restObject.getString("classesId"));
+					restInfo.setDocumenttypeid(restObject.getString("documentTypeId"));
+					restInfo.setStreetid(restObject.getString("streetId"));
+					restInfo.setLogout(restObject.getInteger("logout"));
+					restInfo.setLogouttime(restObject.getLong("logoutTime"));
+					restInfo.setSourcetime(restObject.getLong("sourceTime"));
+					restInfo.setSourcetype(restObject.getInteger("sourceType"));
+					restInfo.setContacttel(restObject.getString("contactTel"));
+					restInfo.setLegalmanfileids(restObject.getString("legalManFileIds"));
+					restInfo.setLegalmanphone(restObject.getString("legalManPhone"));
+					restInfo.setLegalmantel(restObject.getString("legalManTel"));
+					restInfo.setSourcemanid(restObject.getString("sourceManId"));
+					restInfo.setEndcollecttime2(restObject.getLong("endCollectTime2"));
+					restInfo.setFiles(restObject.getString("files"));
+					restInfo.setMealtime(restObject.getLong("mealTime"));
+					restInfo.setRestaurantaddress(restObject.getString("restaurantAddress"));
+					restInfo.setStartcollecttime2(restObject.getLong("startCollectTime2"));
+					restInfo.setUnitaddress(restObject.getString("unitAdress"));
+					restInfo.setUnitname(restObject.getString("unitName"));
+					restInfo.setLastcollectcarcode(restObject.getString("lastCollectCarCode"));
+					restInfo.setLastcollectcarid(restObject.getString("lastCollectCarId"));
+					restInfo.setMealrangedisplayvalue(restObject.getString("mealRangeDisplayValue"));
+					restInfo.setMealrangeid(restObject.getString("mealRangeId"));
+					restInfo.setPinyin(restObject.getString("pinyin"));
+					restInfo.setContactmobile(restObject.getString("contactMobile"));
+					restInfo.setSignedstatus(restObject.getInteger("signedStatus"));
+					restInfo.setElevator(restObject.getInteger("elevator"));
+					restInfo.setSigningenddate(restObject.getLong("signingendDate"));
+					restInfo.setStair(restObject.getInteger("stair"));
+					restInfo.setSyenddate(restObject.getLong("syEndDate"));
+					restInfo.setSystartdate(restObject.getLong("syStartDate"));
+					restInfo.setFloornum(restObject.getInteger("floorNum"));
+					restInfo.setSycompanyname(restObject.getString("syCompanyName"));
+					restInfo.setApplytrashbinnum(restObject.getInteger("applyTrashBinNum"));
+					restInfo.setDatasource(restObject.getInteger("dataSource"));
+					restInfo.setPaperfileids(restObject.getString("paperFileIds"));
+					restInfo.setPaperfilenames(restObject.getString("paperFileNames"));
+					restInfo.setCreditassessrecord(restObject.getString("creditAssessRecord"));
+					result = restInfoService.insert(restInfo);
+					if (result > 0) {
+						count++;
+						if (count == total) {
+							flag = true;
+						}
+					}
+				}
+			}
+
+		}
+		return flag;
+	}
+
+	public static boolean getParameter(int type, IParameterRecordService parameterRecordService) {
+
+		int count = 0;
+		boolean flag = false;
+		geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/commonDataInsert";
+		if (type == 0) {
+			query = "parameters={\"time\":" + timeStamp + ",\"pageSize\":" + j + ",\"pageNo\":1}";
+		} else {// 数据库初始化
+			j = -1;
+			query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		}
+		JSONObject parameterJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		if (parameterJson != null && parameterJson.get("succ").toString().equals("true")) {
+
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(parameterJson.get("data").toString());
+			int total = rowsJson.getIntValue("total");
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject pObject = json.getJSONObject(i);
+					pRecord.setId(pObject.getString("id"));
+					pRecord.setCreatetime(pObject.getDate("createTime"));
+					pRecord.setLastchangetime(pObject.getDate("lastChangeTime"));
+					pRecord.setStatus(pObject.getInteger("status"));
+					pRecord.setBeendeleted(pObject.getInteger("beenDeleted"));
+					pRecord.setDeletedtime(pObject.getDate("deletedTime"));
+					pRecord.setDescription(pObject.getString("description"));
+					pRecord.setDisplayvalue(pObject.getString("displayValue"));
+					pRecord.setOrderindex(pObject.getInteger("orderIndex"));
+					pRecord.setParametervaluetype(pObject.getString("parameterValueType"));
+					pRecord.setValue(pObject.getString("value"));
+					result = parameterRecordService.insert(pRecord);
+					if (result > 0) {
+						count++;
+						if (count == total) {
+							flag = true;
+						}
+					}
+				}
+
+			}
+
+		}
+		return flag;
+	}
+
+	public static boolean getCarInfo(int type, ICarInfoService carInfoService) {
+
+		int count = 0;
+		boolean flag = false;
+		geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/carDataInsert";
+		if (type == 0) {
+			query = "parameters={\"time\":" + timeStamp + ",\"pageSize\":" + j + ",\"pageNo\":1}";
+		} else {// 数据库初始化
+			j = -1;
+			query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		}
+		JSONObject carJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		if (carJson != null && carJson.get("succ").toString().equals("true")) {
+
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(carJson.get("data").toString());
+			int total = rowsJson.getIntValue("total");
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject carObject = json.getJSONObject(i);
+					carInfo.setId(carObject.getString("id"));
+					carInfo.setCreatetime(carObject.getDate("createTime"));
+					carInfo.setLastchangetime(carObject.getDate("lastChangeTime"));
+					carInfo.setStatus(carObject.getInteger("status"));
+					carInfo.setBeendeleted(carObject.getInteger("beenDeleted"));
+					carInfo.setDeletedtime(carObject.getDate("deletedTime"));
+					carInfo.setCarcode(carObject.getString("carCode"));
+					carInfo.setCarload(carObject.getString("carLoad"));
+					carInfo.setDriverphone(carObject.getString("driverPhone"));
+					carInfo.setDriver(carObject.getString("driver"));
+					result = carInfoService.insert(carInfo);
+					if (result > 0) {
+						count++;
+						if (count == total) {
+							flag = true;
+						}
+					}
+				}
+
+			}
+
+		}
+		return flag;
+	}
+
+	public static boolean getDeviceInfo(int type, ICarDeviceService carDeviceService) {
+
+		int count = 0;
+		boolean flag = false;
+		geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/deviceDataInsert";
+		if (type == 0) {
+			query = "parameters={\"time\":" + timeStamp + ",\"pageSize\":" + j + ",\"pageNo\":1}";
+		} else {// 数据库初始化
+			j = -1;
+			query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		}
+		JSONObject deviceJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		if (deviceJson != null && deviceJson.get("succ").toString().equals("true")) {
+
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(deviceJson.get("data").toString());
+			int total = rowsJson.getIntValue("total");
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject deviceObject = json.getJSONObject(i);
+					carDevice.setId(deviceObject.getString("id"));
+					carDevice.setCreatetime(deviceObject.getDate("createTime"));
+					carDevice.setLastchangetime(deviceObject.getDate("lastChangeTime"));
+					carDevice.setBeendeleted(deviceObject.getInteger("beenDeleted"));
+					carDevice.setStatus(deviceObject.getInteger("status"));
+					carDevice.setDeletedtime(deviceObject.getDate("deletedTime"));
+					carDevice.setDevicecode(deviceObject.getString("deviceCode"));
+					carDevice.setDevicephoneno(deviceObject.getString("devicePhoneNo"));
+					carDevice.setCarid(deviceObject.getString("carId"));
+					carDevice.setGpsdevicetype(deviceObject.getString("gpsDeviceType"));
+					carDevice.setLastcarid(deviceObject.getString("lastCarId"));
+					carDeviceService.insert(carDevice);
+					if (result > 0) {
+						count++;
+						if (count == total) {
+							flag = true;
+						}
+					}
+				}
+
+			}
+
+		}
+		return flag;
+	}
+
+	public static boolean getloadoInfo(int type, ILoadoMeterRecordService loadoMeterRecordService) {
+
+		int count = 0;
+		boolean flag = false;
+		geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/weighDataInsert";
+		if (type == 0) {
+			query = "parameters={\"time\":" + timeStamp + ",\"pageSize\":" + j + ",\"pageNo\":1}";
+		} else {// 数据库初始化
+			j = -1;
+			query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		}
+		JSONObject weighJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		if (weighJson != null && weighJson.get("succ").toString().equals("true")) {
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(weighJson.get("data").toString());
+			int total = rowsJson.getIntValue("total");
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject weighObject = json.getJSONObject(i);
+					lRecord.setId(weighObject.getString("id"));
+					lRecord.setCreatetime(weighObject.getDate("createTime"));
+					lRecord.setLastchangetime(weighObject.getDate("lastChangeTime"));
+					lRecord.setBeendeleted(weighObject.getInteger("beenDeleted"));
+					lRecord.setStatus(weighObject.getInteger("status"));
+					lRecord.setDeletedtime(weighObject.getDate("deletedTime"));
+					lRecord.setArea(weighObject.getString("area"));
+					lRecord.setCarno(weighObject.getString("carNo"));
+					lRecord.setCode(weighObject.getString("code"));
+					lRecord.setDataoperatetype(weighObject.getString("dataOperateType"));
+					lRecord.setDisposeunitcode(weighObject.getString("disposeUnitCode"));
+					lRecord.setDriver(weighObject.getString("driver"));
+					lRecord.setGrossdatetime(weighObject.getDate("grossDateTime"));
+					lRecord.setGrossweight(weighObject.getFloat("grossWeight"));
+					lRecord.setHandleunit(weighObject.getString("handleUnit"));
+					lRecord.setIccode(weighObject.getString("icCode"));
+					lRecord.setMemo(weighObject.getString("memo"));
+					lRecord.setNetweight(weighObject.getFloat("netWeight"));
+					lRecord.setNo(weighObject.getString("no"));
+					lRecord.setProductname(weighObject.getString("productName"));
+					lRecord.setProducttowhere(weighObject.getString("productToWhere"));
+					lRecord.setProducttype(weighObject.getString("productType"));
+					lRecord.setSourceunit(weighObject.getString("sourceUnit"));
+					lRecord.setTaredatetime(weighObject.getDate("tareDateTime"));
+					lRecord.setTareweight(weighObject.getFloat("tareWeight"));
+					lRecord.setTransportunit(weighObject.getString("transportUnit"));
+					lRecord.setUrl1(weighObject.getString("url1"));
+					lRecord.setUrl2(weighObject.getString("url2"));
+					lRecord.setUrl3(weighObject.getString("url3"));
+					lRecord.setUrl4(weighObject.getString("url4"));
+					lRecord.setWeighman(weighObject.getString("weighMan"));
+					lRecord.setWeighmode(weighObject.getString("weighMode"));
+					lRecord.setWeightno(weighObject.getString("weightNo"));
+					lRecord.setFilltime(weighObject.getDate("fillTime"));
+					lRecord.setIcrecordid(weighObject.getString("icRecordId"));
+					lRecord.setProductinorout(weighObject.getString("productInOrOut"));
+					result = loadoMeterRecordService.insert(lRecord);
+					if (result > 0) {
+						count++;
+						if (count == total) {
+							flag = true;
+						}
+					}
+				}
+
+			}
+
+		}
+		return flag;
+	}
+
+	/**
+	 * @Title: main @Description: TODO(这里用一句话描述这个方法的作用) @param @param
+	 *         args参数说明 @return void 返回类型 @throws
+	 */
+	public static void main(String[] args) {
+
+		/*
+		 * // 获取parameter信息 String geturl =
+		 * "http://222.92.212.126:32633/vortexrest/api/czcc/data/commonDataInsert";
+		 * int j = 35; String query = "parameters={\"pageSize\":" + j +
+		 * ",\"pageNo\":1}"; //
+		 * ?parameters={"time":1422064874000,"pageSize":20,"pageNo":1}
+		 * JSONObject parameterJson =
+		 * JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST",
+		 * query)); System.err.println("rfidJson:" + rfidJson); if
+		 * (parameterJson != null &&
+		 * parameterJson.get("succ").toString().equals("true")) { // 数据库操作
+		 * JSONObject rowsJson =
+		 * JSONObject.parseObject(parameterJson.get("data").toString());
+		 * JSONArray json =
+		 * JSONArray.parseArray(rowsJson.get("rows").toString()); //
+		 * 首先把字符串转成JSONArray对象 if (json.size() > 0) { for (int i = 0; i <
+		 * json.size(); i++) { JSONObject pObject = json.getJSONObject(i);
+		 * System.out.println("id=" + pObject.get("id"));
+		 * pRecord.setId(pObject.getString("id"));
+		 * pRecord.setCreatetime(pObject.getDate("createTime"));
+		 * pRecord.setLastchangetime(pObject.getDate("lastChangeTime"));
+		 * pRecord.setStatus(pObject.getInteger("status"));
+		 * pRecord.setBeendeleted(pObject.getInteger("beenDeleted"));
+		 * pRecord.setDeletedtime(pObject.getDate("deletedTime"));
+		 * pRecord.setDescription(pObject.getString("description"));
+		 * pRecord.setDisplayvalue(pObject.getString("displayValue"));
+		 * pRecord.setOrderindex(pObject.getInteger("orderIndex"));
+		 * pRecord.setParametervaluetype(pObject.getString("parameterValueType")
+		 * ); pRecord.setValue(pObject.getString("value"));
+		 * System.err.println("NO." + i + "-Object:" + pRecord);
+		 * 
+		 * } }
+		 * 
+		 * }
+		 */
+
+		// 获取parameter信息
+		String geturl = "http://222.92.212.126:32633/vortexrest/api/czcc/data/restDataInsert";
+		int j = -1;
+		String query = "parameters={\"pageSize\":" + j + ",\"pageNo\":1}";
+		// ?parameters={"time":1422064874000,"pageSize":20,"pageNo":1}
+		JSONObject restJson = JSONObject.parseObject(HttpClientUtil.loadData(geturl, "POST", query));
+		System.err.println("rfidJson:" + restJson);
+		if (restJson != null && restJson.get("succ").toString().equals("true")) {
+			// 数据库操作
+			JSONObject rowsJson = JSONObject.parseObject(restJson.get("data").toString());
+			JSONArray json = JSONArray.parseArray(rowsJson.get("rows").toString()); // 首先把字符串转成JSONArray对象
+			if (json.size() > 0) {
+				for (int i = 0; i < json.size(); i++) {
+					JSONObject restObject = json.getJSONObject(i);
+					System.out.println("id=" + restObject.get("id"));
+					restInfo.setId(restObject.getString("id"));
+					restInfo.setCreatetime(restObject.getLong("createTime"));
+					restInfo.setLastchangetime(restObject.getLong("lastChangeTime"));
+					restInfo.setStatus(restObject.getInteger("status"));
+					restInfo.setBeendeleted(restObject.getInteger("beenDeleted"));
+					restInfo.setDeletedtime(restObject.getLong("deletedTime"));
+					restInfo.setAddress(restObject.getString("address"));
+					restInfo.setBusinessarea(restObject.getFloat("businessArea"));
+					restInfo.setClosedate(restObject.getLong("closeDate"));
+					restInfo.setCode(restObject.getString("code"));
+					restInfo.setCollectfrequency(restObject.getFloat("collectFrequency"));
+					restInfo.setComplaintshotline(restObject.getString("complaintsHotline"));
+					restInfo.setContactperson(restObject.getString("contactPerson"));
+					restInfo.setContactphone(restObject.getString("contactPhone"));
+					restInfo.setContractlength(restObject.getFloat("contractLength"));
+					restInfo.setContractno(restObject.getString("contractNo"));
+					restInfo.setDailyoutput(restObject.getFloat("dailyOutput"));
+					restInfo.setDailyoutputwasteoil(restObject.getFloat("dailyOutputWasteOil"));
+					restInfo.setDocumentno(restObject.getString("documentNo"));
+					restInfo.setEndcollecttime(restObject.getLong("endCollectTime"));
+					restInfo.setHygieniclicensedate(restObject.getLong("hygienicLicenseDate"));
+					restInfo.setIscollectscdoil(restObject.getInteger("isCollectScdOil"));
+					restInfo.setLastcollectdatetime(restObject.getLong("lastCollectDateTime"));
+					restInfo.setLatitude(restObject.getDouble("latitude"));
+					restInfo.setLatitudedone(restObject.getDouble("latitudeDone"));
+					restInfo.setLegalrepresentative(restObject.getString("legalRepresentative"));
+					restInfo.setLongitude(restObject.getDouble("longitude"));
+					restInfo.setLongitudedone(restObject.getDouble("longitudeDone"));
+					restInfo.setMealrange(restObject.getString("mealRange"));
+					restInfo.setName(restObject.getString("name"));
+					restInfo.setOpendate(restObject.getLong("openDate"));
+					restInfo.setOrderindex(restObject.getInteger("orderIndex"));
+					restInfo.setPermit(restObject.getInteger("permit"));
+					restInfo.setPermitno(restObject.getString("permitNo"));
+					restInfo.setPhonenumber(restObject.getString("phoneNumber"));
+					restInfo.setPhotofile(restObject.getString("photoFile"));
+					restInfo.setPhotoids(restObject.getString("photoIds"));
+					restInfo.setRemain(restObject.getFloat("remain"));
+					restInfo.setRemarks(restObject.getString("remarks"));
+					restInfo.setScale(restObject.getString("scale"));
+					restInfo.setSigningdate(restObject.getLong("signingDate"));
+					restInfo.setStarlevel(restObject.getString("starLevel"));
+					restInfo.setStartcollecttime(restObject.getLong("startCollectTime"));
+					restInfo.setSycompanyfile(restObject.getString("syCompanyFile"));
+					restInfo.setSycompanyid(restObject.getString("syCompanyId"));
+					restInfo.setTrashbinnum(restObject.getInteger("trashbinNum"));
+					restInfo.setType(restObject.getString("type"));
+					restInfo.setWasteoil(restObject.getFloat("wasteOil"));
+					restInfo.setClassesid(restObject.getString("classesId"));
+					restInfo.setDocumenttypeid(restObject.getString("documentTypeId"));
+					restInfo.setStreetid(restObject.getString("streetId"));
+					restInfo.setLogout(restObject.getInteger("logout"));
+					restInfo.setLogouttime(restObject.getLong("logoutTime"));
+					restInfo.setSourcetime(restObject.getLong("sourceTime"));
+					restInfo.setSourcetype(restObject.getInteger("sourceType"));
+					restInfo.setContacttel(restObject.getString("contactTel"));
+					restInfo.setLegalmanfileids(restObject.getString("legalManFileIds"));
+					restInfo.setLegalmanphone(restObject.getString("legalManPhone"));
+					restInfo.setLegalmantel(restObject.getString("legalManTel"));
+					restInfo.setSourcemanid(restObject.getString("sourceManId"));
+					restInfo.setEndcollecttime2(restObject.getLong("endCollectTime2"));
+					restInfo.setFiles(restObject.getString("files"));
+					restInfo.setMealtime(restObject.getLong("mealTime"));
+					restInfo.setRestaurantaddress(restObject.getString("restaurantAddress"));
+					restInfo.setStartcollecttime2(restObject.getLong("startCollectTime2"));
+					restInfo.setUnitaddress(restObject.getString("unitAdress"));
+					restInfo.setUnitname(restObject.getString("unitName"));
+					restInfo.setLastcollectcarcode(restObject.getString("lastCollectCarCode"));
+					restInfo.setLastcollectcarid(restObject.getString("lastCollectCarId"));
+					restInfo.setMealrangedisplayvalue(restObject.getString("mealRangeDisplayValue"));
+					restInfo.setMealrangeid(restObject.getString("mealRangeId"));
+					restInfo.setPinyin(restObject.getString("pinyin"));
+					restInfo.setContactmobile(restObject.getString("contactMobile"));
+					restInfo.setSignedstatus(restObject.getInteger("signedStatus"));
+					restInfo.setElevator(restObject.getInteger("elevator"));
+					restInfo.setSigningenddate(restObject.getLong("signingendDate"));
+					restInfo.setStair(restObject.getInteger("stair"));
+					restInfo.setSyenddate(restObject.getLong("syEndDate"));
+					restInfo.setSystartdate(restObject.getLong("syStartDate"));
+					restInfo.setFloornum(restObject.getInteger("floorNum"));
+					restInfo.setSycompanyname(restObject.getString("syCompanyName"));
+					restInfo.setApplytrashbinnum(restObject.getInteger("applyTrashBinNum"));
+					restInfo.setDatasource(restObject.getInteger("dataSource"));
+					restInfo.setPaperfileids(restObject.getString("paperFileIds"));
+					restInfo.setPaperfilenames(restObject.getString("paperFileNames"));
+					restInfo.setCreditassessrecord(restObject.getString("creditAssessRecord"));
+					// System.err.println("NO." + i + "-Object:" + restInfo);
+
+				}
+			}
+
+		}
+
+	}
+
+}

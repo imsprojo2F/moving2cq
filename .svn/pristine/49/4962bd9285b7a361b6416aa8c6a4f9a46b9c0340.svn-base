@@ -1,0 +1,165 @@
+package com.movingcq.entity;
+
+import java.util.Date;
+
+public class RfidInfo {
+	private String id;
+
+	private Date createtime;
+
+	private Date lastchangetime;
+
+	private Integer status;
+
+	private Integer beendeleted;
+
+	private Date deletedtime;
+
+	private String cardbindingdate;
+
+	private Integer orderindex;
+
+	private String remarks;
+
+	private String rfidcode;
+
+	private String rfidstatus;
+
+	private String trashbinmodel;
+
+	private String trashweight;
+
+	private Integer beenmark;
+
+	private String restaurantId;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id == null ? null : id.trim();
+	}
+
+	public Date getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+
+	public Date getLastchangetime() {
+		return lastchangetime;
+	}
+
+	public void setLastchangetime(Date lastchangetime) {
+		this.lastchangetime = lastchangetime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getBeendeleted() {
+		return beendeleted;
+	}
+
+	public void setBeendeleted(Integer beendeleted) {
+		this.beendeleted = beendeleted;
+	}
+
+	public Date getDeletedtime() {
+		return deletedtime;
+	}
+
+	public void setDeletedtime(Date deletedtime) {
+		this.deletedtime = deletedtime;
+	}
+
+	public String getCardbindingdate() {
+		return cardbindingdate;
+	}
+
+	public void setCardbindingdate(String cardbindingdate) {
+		this.cardbindingdate = cardbindingdate == null ? null : cardbindingdate.trim();
+	}
+
+	public Integer getOrderindex() {
+		return orderindex;
+	}
+
+	public void setOrderindex(Integer orderindex) {
+		this.orderindex = orderindex;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks == null ? null : remarks.trim();
+	}
+
+	public String getRfidcode() {
+		return rfidcode;
+	}
+
+	public void setRfidcode(String rfidcode) {
+		this.rfidcode = rfidcode == null ? null : rfidcode.trim();
+	}
+
+	public String getRfidstatus() {
+		return rfidstatus;
+	}
+
+	public void setRfidstatus(String rfidstatus) {
+		this.rfidstatus = rfidstatus == null ? null : rfidstatus.trim();
+	}
+
+	public String getTrashbinmodel() {
+		return trashbinmodel;
+	}
+
+	public void setTrashbinmodel(String trashbinmodel) {
+		this.trashbinmodel = trashbinmodel == null ? null : trashbinmodel.trim();
+	}
+
+	public String getTrashweight() {
+		return trashweight;
+	}
+
+	public void setTrashweight(String trashweight) {
+		this.trashweight = trashweight == null ? null : trashweight.trim();
+	}
+
+	public Integer getBeenmark() {
+		return beenmark;
+	}
+
+	public void setBeenmark(Integer beenmark) {
+		this.beenmark = beenmark;
+	}
+
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+
+	@Override
+	public String toString() {
+		return "RfidInfo [id=" + id + ", createtime=" + createtime + ", lastchangetime=" + lastchangetime + ", status="
+				+ status + ", beendeleted=" + beendeleted + ", deletedtime=" + deletedtime + ", cardbindingdate="
+				+ cardbindingdate + ", orderindex=" + orderindex + ", remarks=" + remarks + ", rfidcode=" + rfidcode
+				+ ", rfidstatus=" + rfidstatus + ", trashbinmodel=" + trashbinmodel + ", trashweight=" + trashweight
+				+ ", beenmark=" + beenmark + ", restaurantId=" + restaurantId + "]";
+	}
+
+}

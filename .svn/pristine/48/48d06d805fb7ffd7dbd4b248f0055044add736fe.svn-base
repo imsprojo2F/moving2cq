@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movingcq.dao.CarDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.movingcq.entity.CarDevice">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastChangeTime" jdbcType="TIMESTAMP" property="lastchangetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="beenDeleted" jdbcType="INTEGER" property="beendeleted" />
+    <result column="deletedTime" jdbcType="TIMESTAMP" property="deletedtime" />
+    <result column="deviceCode" jdbcType="VARCHAR" property="devicecode" />
+    <result column="devicePhoneNo" jdbcType="VARCHAR" property="devicephoneno" />
+    <result column="carId" jdbcType="VARCHAR" property="carid" />
+    <result column="gpsDeviceType" jdbcType="VARCHAR" property="gpsdevicetype" />
+    <result column="lastCarId" jdbcType="VARCHAR" property="lastcarid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, createTime, lastChangeTime, status, beenDeleted, deletedTime, deviceCode, devicePhoneNo, 
+    carId, gpsDeviceType, lastCarId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from car_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movingcq.entity.CarDevice">
+    insert into car_device (id, createTime, lastChangeTime, 
+      status, beenDeleted, deletedTime, 
+      deviceCode, devicePhoneNo, carId, 
+      gpsDeviceType, lastCarId)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastchangetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{beendeleted,jdbcType=INTEGER}, #{deletedtime,jdbcType=TIMESTAMP}, 
+      #{devicecode,jdbcType=VARCHAR}, #{devicephoneno,jdbcType=VARCHAR}, #{carid,jdbcType=VARCHAR}, 
+      #{gpsdevicetype,jdbcType=VARCHAR}, #{lastcarid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movingcq.entity.CarDevice">
+    insert into car_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedTime,
+      </if>
+      <if test="devicecode != null">
+        deviceCode,
+      </if>
+      <if test="devicephoneno != null">
+        devicePhoneNo,
+      </if>
+      <if test="carid != null">
+        carId,
+      </if>
+      <if test="gpsdevicetype != null">
+        gpsDeviceType,
+      </if>
+      <if test="lastcarid != null">
+        lastCarId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicecode != null">
+        #{devicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="devicephoneno != null">
+        #{devicephoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        #{carid,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsdevicetype != null">
+        #{gpsdevicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcarid != null">
+        #{lastcarid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movingcq.entity.CarDevice">
+    update car_device
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastchangetime != null">
+        lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="beendeleted != null">
+        beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      </if>
+      <if test="deletedtime != null">
+        deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicecode != null">
+        deviceCode = #{devicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="devicephoneno != null">
+        devicePhoneNo = #{devicephoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        carId = #{carid,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsdevicetype != null">
+        gpsDeviceType = #{gpsdevicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="lastcarid != null">
+        lastCarId = #{lastcarid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movingcq.entity.CarDevice">
+    update car_device
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastChangeTime = #{lastchangetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      beenDeleted = #{beendeleted,jdbcType=INTEGER},
+      deletedTime = #{deletedtime,jdbcType=TIMESTAMP},
+      deviceCode = #{devicecode,jdbcType=VARCHAR},
+      devicePhoneNo = #{devicephoneno,jdbcType=VARCHAR},
+      carId = #{carid,jdbcType=VARCHAR},
+      gpsDeviceType = #{gpsdevicetype,jdbcType=VARCHAR},
+      lastCarId = #{lastcarid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

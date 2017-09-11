@@ -1,0 +1,181 @@
+/**   
+ * @Title: RfidInfoController.java 
+ * @Package com.movingcq.controller 
+ * @Description: TODO(用一句话描述该文件做什么) 
+ * @author IsProjo
+ * @date 2016年12月14日 下午5:08:12 
+ * @version V1.0   
+ */
+package com.movingcq.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.movingcq.entity.Bucket2RfidInfo;
+import com.movingcq.entity.QueryParameters;
+import com.movingcq.entity.RfidInfo;
+import com.movingcq.service.IBucketInfoService;
+import com.movingcq.service.IRfidInfoService;
+import com.movingcq.util.ApiResult;
+
+/**
+ * @ClassName: RfidInfoController
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author IsProjo
+ * @date 2016年12月14日 下午5:08:12
+ * 
+ */
+
+@Controller
+@RequestMapping("/rfid")
+public class RfidInfoController {
+
+	public static int PAGE_NOW;
+	public static int PAGE_SIZE;
+
+	private int isSucc = 0;
+	boolean isTrue = false;
+	String key = "";
+	String sortKey = "";
+	String sortType = "";
+	String spageNow = "";
+	String spageSize = "";
+	Object rObject = null;
+
+	@Autowired
+	private IRfidInfoService rfidService;
+	@Autowired
+	private IBucketInfoService bucketService;
+
+	// 验证是否已被使用
+	@ResponseBody
+	@RequestMapping("validate")
+	public Object validate(String validateValue) {
+
+		RfidInfo rfidInfo = null;
+		rfidInfo = rfidService.selectByAcc(validateValue);
+		if (rfidInfo == null) {
+			rObject = new ApiResult("可用", ApiResult.CODE_SUCCESS);
+		} else {
+			rObject = new ApiResult("不可用", ApiResult.CODE_FAIL);
+		}
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("addRfid")
+	public Object addRfid(RfidInfo rfidInfo) {
+
+		// rfidInfo.setCreatetime(GetCurrentTime.getNow());
+		isSucc = rfidService.insert(rfidInfo);
+		if (isSucc == 1) {
+			rObject = new ApiResult("保存成功", ApiResult.CODE_SUCCESS);
+		} else {
+			rObject = new ApiResult("保存失败", ApiResult.CODE_FAIL);
+		}
+
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("deleteRfid")
+	public Object deleteUser(HttpServletRequest request) {
+		String idArr = request.getParameter("ids");
+		String rfid = request.getParameter("rfids");
+		String[] ids = idArr.split(",");
+		String[] rfids = rfid.split(",");
+
+		isSucc = rfidService.deleteById(ids);
+
+		// 检查用户是否删除了bucket，防止空指针
+		List<Bucket2RfidInfo> bList = bucketService.listAllBucketInfo(null);
+		if (bList.size() > 0) {
+			bucketService.deleteByRfids(rfids);
+		}
+		if (isSucc > 0) {
+			rObject = new ApiResult("删除成功", ApiResult.CODE_SUCCESS);
+		} else {
+			rObject = new ApiResult("删除失败", ApiResult.CODE_FAIL);
+		}
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("updateRfid")
+	public Object updateRfid(RfidInfo rfidInfo, HttpServletRequest request) {
+		String oldRfid = request.getParameter("oldRfid");
+
+		/*
+		 * rfidInfo.setUpdateTime(GetCurrentTime.getNow()); int isSucc =
+		 * rfidService.updateById(rfidInfo);
+		 * bucketService.updateByRfid(rfidInfo.getRfid(), oldRfid); if (isSucc >
+		 * 0) { rObject = new ApiResult("保存成功", ApiResult.CODE_SUCCESS); } else
+		 * { rObject = new ApiResult("保存失败", ApiResult.CODE_FAIL); }
+		 */
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("listAllRfid")
+	public Map<String, Object> listAllRfid(QueryParameters qParameters) {
+
+		PAGE_NOW = qParameters.getPage();
+		PAGE_SIZE = qParameters.getRows();
+		PAGE_NOW = (PAGE_NOW - 1) * PAGE_SIZE;
+		qParameters.setPage(PAGE_NOW);
+
+		// 获取rfid总记录数
+
+		List<RfidInfo> allList = rfidService.listAllRfidInfo(qParameters);
+		int recordNum = allList.size();
+
+		List<RfidInfo> rfidList = rfidService.selectByPage(qParameters);
+		if (rfidList != null) {
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("total", recordNum);
+			result.put("rows", rfidList);
+			return result;
+		}
+		return null;
+
+	}
+
+	// 查询所有未被使用的rfid标签用于bucketInfo rfid下拉框
+	@ResponseBody
+	@RequestMapping("listUnuseRfid")
+	public Object listRfid() {
+
+		List<RfidInfo> allList = rfidService.listAllRfidInfo();
+		return allList;
+
+	}
+
+	/**
+	 * 垃圾桶RFID
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/info")
+	public String info() {
+		return "rfid/info";
+	}
+
+	/**
+	 * 垃圾桶RFID更替记录
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/replaceRecord")
+	public String replaceRecord() {
+		return "rfid/replaceRecord";
+	}
+
+}

@@ -1,0 +1,227 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html >
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+  <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+  <title>userOperate</title>
+
+  <!-- ========== Css Files ========== -->
+  <link href="css/root.css" rel="stylesheet">
+
+  </head>
+  <body>
+  <!-- Start Page Loading -->
+  <div class="loading"><img src="img/loading.gif" alt="loading-img"></div>
+  <!-- End Page Loading -->
+ 
+
+<!-- START CONTENT -->
+<div class="content">
+
+  <!-- Start Presentation -->
+  <div class="row presentation" style="padding:10px 35px">
+    <div class="col-lg-8 col-md-6 titles">
+      <h4>用户信息管理</h4>
+    </div>
+  </div>
+  <!-- End Presentation -->
+
+<!-- START CONTAINER -->
+<div class="container-padding">
+
+  <!-- Start Row -->
+  <div class="row">
+
+    <!-- Start Panel -->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+
+            <table id="dataTable" class="table display order-column" style="text-align:center;">
+                <thead>
+                    <tr >
+                        <th style="text-align:center;">id</th>
+                        <th style="text-align:center;">账号</th>
+                        <th style="text-align:center;">密码</th>
+                        <th style="text-align:center;"data-orderable="false">姓名</th>
+                        <th style="text-align:center;">创建时间</th>
+                        <th style="text-align:center;" data-orderable="false">是否启用</th>
+                    </tr>
+                </thead>
+             	<tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th style="text-align:center;">id</th>
+                        <th style="text-align:center;">账号</th>
+                        <th style="text-align:center;">密码</th>
+                        <th style="text-align:center;">姓名</th>
+                        <th style="text-align:center;">创建时间</th>
+                        <th style="text-align:center;">是否启用</th>
+                    </tr>
+                </tfoot>
+             
+            </table>
+
+
+        </div>
+
+      </div>
+    </div>
+    <!-- End Panel -->
+
+
+  </div>
+  <!-- End Row -->
+
+
+</div>
+<!-- END CONTAINER -->
+
+</div>
+
+
+
+
+<!-- ================================================
+jQuery Library
+================================================ -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<!-- ================================================
+Bootstrap Core JavaScript File
+================================================ -->
+<script src="js/bootstrap/bootstrap.min.js"></script>
+
+<!-- ================================================
+Plugin.js - Some Specific JS codes for Plugin Settings
+================================================ -->
+<script type="text/javascript" src="js/plugins.js"></script>
+
+<!-- ================================================
+Data Tables
+================================================ -->
+<!-- <script src="js/datatables/datatables.min.js"></script> -->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#dataTable').dataTable({
+    	"processing": true,
+        "serverSide": true,
+        "ajax":"user/listAllUser",
+        /* "columnDefs": [//用于隐藏字段  
+    	             {  
+    	                 "targets": [ 0 ],  
+    	                 "visible": false  
+    	             }  
+    	        ], */
+    	"columns": [
+                    { "data": "id"},
+                    { "data": "user_account" },
+                    { "data": "password" },
+                    { "data": "user_name" },
+                    { "data": "create_time" },
+                    { "data": "enabled" }
+                ],
+    	"paging":   true,		//分页
+    	"bFilter" : true,		// 搜索栏
+    	"pagingType": "full_numbers",
+        "ordering": true,		//排序
+        "order": [[ 0, "desc" ]],
+        "info":     true,		//显示总共有几条记录
+        //"order": [[ 3, "desc" ]]//默认排序 从0开始算
+        "language": {
+            "decimal":        "",
+            "emptyTable":     "暂无记录",
+            "info":           "当前显示_START_ 到 _END_ / 总记录数 _TOTAL_",
+            "infoEmpty":      "展示 0 to 0 of 0 数据记录",
+            "infoFiltered":   "(筛选自_MAX_ 条记录)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "每页显示 _MENU_ 条记录",
+            "loadingRecords": "努力加载中...",
+            "processing":     "数据加载中...",
+            "search":         "关键字查询:",
+            "zeroRecords":    "没有匹配的记录",
+            "paginate": {
+                "first":      "首页",
+                "last":       "末页",
+                "next":       "下一页",
+                "previous":   "上一页"
+            },
+            "aria": {
+                "sortAscending":  ": activate to sort column ascending",
+                "sortDescending": ": activate to sort column descending"
+            }
+          },
+          
+          /* "createdRow": function ( row, data, index ) {//回调函数用于格式化返回数据
+        	  				console.log(data.name);
+	                      if ( data.name.replace(/[\$,]/g, '') * 1 > 150000 ) {
+	                          $('td', row).eq(5).addClass('highlight');
+	                      }
+	                  }, */
+	     /*  "initComplete": function () {//初始化完成回调函数
+		                      var api = this.api();
+		                      api.$('td').click( function () {
+		                          api.search( this.innerHTML ).draw();
+		                      } );
+		                  } */
+	      /* "aoColumns": [//设置字段排序规则
+	                      null,
+	                      null,
+	                      { "orderSequence": [ "asc" ] },
+	                      { "orderSequence": [ "desc", "asc", "asc" ] },
+	                      { "orderSequence": [ "desc" ] },
+	                      null
+	                    ] */
+	      
+
+    });
+    
+    //添加工具条
+    $("#dataTable_length").prepend('<b>Custom tool bar! Text/images etc.</b><br>');
+    
+    //tr绑定点击事件
+    var table = $('#dataTable').DataTable();
+
+    
+    
+    //单选tr
+    $('#dataTable tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            var data = table.row( this ).data();
+            console.log(data);
+            alert( 'You clicked on '+data[0]+'\'s row' );
+        }
+    } );
+ 
+    $('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    } );
+    
+} );
+	
+	//去除排序查询
+	/* $.extend( true, $.fn.dataTable.defaults, {
+	    "searching": false,
+	    "ordering": false
+	} ); */
+	
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+/**   
+* @Title: RestaurantInfoController.java 
+* @Package com.movingcq.controller 
+* @Description: TODO(用一句话描述该文件做什么) 
+* @author IsProjo
+* @date 2016年12月7日 下午4:18:03 
+* @version V1.0   
+*/
+package com.movingcq.controller;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.movingcq.entity.BucketInfo;
+import com.movingcq.entity.MapBasicInfo;
+import com.movingcq.entity.QueryParameters;
+import com.movingcq.entity.RestaurantBucketInfo;
+import com.movingcq.entity.RestaurantInfo;
+import com.movingcq.service.IBucketInfoService;
+import com.movingcq.service.IMapBasicInfoService;
+import com.movingcq.service.IRest2BucketService;
+import com.movingcq.service.IRestInfoService;
+import com.movingcq.util.ApiResult;
+
+/**
+ * @ClassName: RestaurantInfoController
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author IsProjo
+ * @date 2016年12月7日 下午4:18:03
+ * 
+ */
+@Controller
+@RequestMapping("/restInfo")
+public class RestaurantInfoController {
+
+	public static int PAGE_NOW;
+	public static int PAGE_SIZE;
+	private int isSuccess = 0;
+	private int isSuccess_0 = 0;
+	boolean isTrue = false;
+	String key = "";
+	String sortKey = "";
+	String sortType = "";
+	String spageNow = "";
+	String spageSize = "";
+	Object rObject = null;
+
+	@Resource
+	private IRestInfoService restInfoService;
+
+	@Autowired
+	private IRest2BucketService rest2bucketService;
+
+	@Autowired
+	private IBucketInfoService bucketService;
+
+	@Autowired
+	private IMapBasicInfoService mapBasicInfoService;
+
+	MapBasicInfo mapInfo = new MapBasicInfo();
+
+	@ResponseBody
+	@RequestMapping("add")
+	public Object addRestInfo(RestaurantInfo rInfo) {
+
+		/*
+		 * isSuccess = restInfoService.addRestInfo(rInfo); // 添加商家地图位置信息
+		 * mapInfo.setRestaurantUid(rInfo.code);
+		 * mapInfo.setLongitude(BigDecimal.valueOf(rInfo.longitude_done));
+		 * mapInfo.setLatitude(BigDecimal.valueOf(rInfo.latitude_done));
+		 * mapInfo.setCreateTime(GetCurrentTime.getNow()); isSuccess_0 =
+		 * mapBasicInfoService.insertSelective(mapInfo); if (isSuccess > 0 &&
+		 * isSuccess_0 > 0) { rObject = new ApiResult("可用",
+		 * ApiResult.CODE_SUCCESS); } else { rObject = new ApiResult("不可用",
+		 * ApiResult.CODE_FAIL); }
+		 */
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("deleteRestInfo")
+	public Object deleteUser(HttpServletRequest request) {
+		String idArr = request.getParameter("ids");
+		String codeArr = request.getParameter("codes");
+
+		String[] ids = idArr.split(",");
+		String[] codes = codeArr.split(",");
+
+		Map<String, String> map = new HashMap<>();
+		BucketInfo bucketInfo = new BucketInfo();
+		// 按restId查询restaurant_bucket表获取当前商家所有绑定的桶并解绑
+		for (int j = 0; j < ids.length; j++) {
+			map.put("restId", ids[j]);
+			List<RestaurantBucketInfo> allList = rest2bucketService.getAllBindIdByRestid(map);
+			for (RestaurantBucketInfo rInfo : allList) {
+				bucketInfo.id = rInfo.bucket_id;
+				bucketInfo.is_binding = 0;
+				// 更新桶为解绑状态
+				isSuccess = bucketService.updateById(bucketInfo);
+			}
+		}
+
+		isSuccess = restInfoService.deleteById(ids);
+		isSuccess_0 = mapBasicInfoService.deleteByCodes(codes);
+		if (isSuccess > 0 && isSuccess_0 > 0) {
+			rObject = new ApiResult("删除成功", ApiResult.CODE_SUCCESS);
+		} else {
+			rObject = new ApiResult("删除失败", ApiResult.CODE_FAIL);
+		}
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("updateRestInfo")
+	public Object updateUser(RestaurantInfo rInfo) {
+
+		int isSuccess = restInfoService.updateById(rInfo);
+		// 更新商家地图位置信息
+		/*
+		 * mapInfo.setRestaurantUid(rInfo.code);
+		 * mapInfo.setLongitude(BigDecimal.valueOf(rInfo.longitude_done));
+		 * mapInfo.setLatitude(BigDecimal.valueOf(rInfo.latitude_done));
+		 * mapInfo.setCreateTime(GetCurrentTime.getNow()); isSuccess_0 =
+		 * mapBasicInfoService.insertSelective(mapInfo); if (isSuccess > 0 &&
+		 * isSuccess_0 > 0) { rObject = new ApiResult("保存成功",
+		 * ApiResult.CODE_SUCCESS); } else { rObject = new ApiResult("保存失败",
+		 * ApiResult.CODE_FAIL); }
+		 */
+		return rObject;
+	}
+
+	@ResponseBody
+	@RequestMapping("updateByCode")
+	public Object updateByCode(RestaurantInfo rInfo) {
+
+		// 更新商家地图位置信息
+		/*
+		 * mapInfo.setRestaurantUid(rInfo.code);
+		 * mapInfo.setLongitude(BigDecimal.valueOf(rInfo.longitude_done));
+		 * mapInfo.setLatitude(BigDecimal.valueOf(rInfo.latitude_done));
+		 * mapInfo.setCreateTime(GetCurrentTime.getNow()); isSuccess_0 =
+		 * mapBasicInfoService.insertSelective(mapInfo); if (isSuccess > 0 &&
+		 * isSuccess_0 > 0) { rObject = new ApiResult("保存成功",
+		 * ApiResult.CODE_SUCCESS); } else { rObject = new ApiResult("保存失败",
+		 * ApiResult.CODE_FAIL); }
+		 */
+		return rObject;
+	}
+
+	/*
+	 * @param QueryParameters qParameters
+	 * 
+	 * @param nowpage 当前页，这个是jquery-easyui自动提交的能参数，参数名必须为page
+	 * 
+	 * @param rows 每页显示的记录数，这个是jquery-easyui自动提交的参数，参数名必须为rows
+	 * 
+	 * @return
+	 * 
+	 */
+
+	@ResponseBody
+	@RequestMapping("listAllRestInfo")
+	public Map<String, Object> listAllUser(QueryParameters qParameters) {
+
+		PAGE_NOW = qParameters.getPage();
+		PAGE_SIZE = qParameters.getRows();
+		PAGE_NOW = (PAGE_NOW - 1) * PAGE_SIZE;
+		qParameters.setPage(PAGE_NOW);
+
+		// 获取账号总记录数
+
+		List<RestaurantInfo> allList = restInfoService.listAllRestInfo(qParameters);
+		int recordNum = allList.size();
+
+		List<RestaurantInfo> restInfoList = restInfoService.selectByPage(qParameters);
+		if (restInfoList != null) {
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("total", recordNum);
+			result.put("rows", restInfoList);
+			return result;
+		}
+		return null;
+
+	}
+
+	@RequestMapping("toMap")
+	public String toMap() {
+		return "maptest";
+	}
+
+	@RequestMapping("toCity")
+	public String toCity(HttpServletRequest request) {
+		String val = request.getParameter("val");
+		try {
+			val = new String(val.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("val", val);
+		return "getCity";
+	}
+
+	@RequestMapping("/info")
+	public ModelAndView index(String id, HttpServletRequest request, Model m) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user2company/restInfo");
+		return mv;
+	}
+
+	@RequestMapping("/area_info")
+	public ModelAndView areaInfo(Model m) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user2company/areaInfo");
+		return mv;
+	}
+
+}

@@ -1,0 +1,52 @@
+/**   
+* @Title: DriverInfoMapper.java 
+* @Package com.movingcq.dao 
+* @Description: TODO(用一句话描述该文件做什么) 
+* @author IsProjo
+* @date 2016年12月21日 上午10:17:45 
+* @version V1.0   
+*/
+package com.movingcq.dao;
+
+import java.util.List;
+
+import com.movingcq.entity.DriverInfo;
+import com.movingcq.entity.QueryParameters;
+
+/**
+ * @ClassName: DriverInfoMapper
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author IsProjo
+ * @date 2016年12月21日 上午10:17:45
+ * 
+ */
+public interface DriverInfoMapper {
+
+	List<DriverInfo> listAllDriver(QueryParameters qParameters);
+
+	List<DriverInfo> selectByPage(QueryParameters qParameters);
+
+	/**
+	 * @param driverInfo
+	 * @return
+	 */
+	int addDriver(DriverInfo driverInfo);
+
+	int insertByCode(String pic, String fileName, String filePath);
+
+	/**
+	 * @param ids
+	 * @return
+	 */
+	int deleteById(String[] ids);
+
+	/**
+	 * @param DriverInfo
+	 * @return
+	 */
+	int updateById(DriverInfo driverInfo);
+
+	int updateByCode(DriverInfo driverInfo);
+
+	int updateFilePath(String uid, String file, String src);
+}
